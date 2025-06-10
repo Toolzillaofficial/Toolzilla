@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Tool Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f14; /* Main Background */
+            color: #e0e0e0; /* Primary Text */
+            scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
+        }
+        .placeholder-image-fallback {
+            background-color: #1c222d; /* Using navbar background for placeholder fallback */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #c5d1de; /* Secondary Description Text */
+            border-radius: 0.5rem;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1c222d; /* Using navbar background */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #42f8f5; /* Primary Accent */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3ff7f3; /* Accent Shade */
+        }
+
+        /* Styles for the slideshow */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%; /* Take full height of parent grid cell */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(66, 248, 245, 0.2), 0 44px 6px -2px rgba(66, 248, 245, 0.1); /* Glow Shadow */
+        }
+
+        .mySlides {
+            display: none; /* Hidden by default */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images cover the area */
+        }
+
+        /* Custom glow effect for primary buttons */
+        .btn-primary-glow {
+            box-shadow: 0 0 15px rgba(66, 248, 245, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-[#0d0f14]">
+    <!-- Navigation Bar -->
+    <nav class="bg-[#1c222d] text-white p-4 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#ffffff]">Logo</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="text-[#e0e0e0] hover:text-[#42f8f5] transition duration-300">Home</a>
+                <a href="#tools" class="text-[#e0e0e0] hover:text-[#42f8f5] transition duration-300">Tools</a>
+                <a href="#about-us" class="text-[#e0e0e0] hover:text-[#42f8f5] transition duration-300">About Us</a>
+                <a href="#how-to-use-tools" class="text-[#e0e0e0] hover:text-[#42f8f5] transition duration-300">Guide</a>
+                <a href="#contact-us" class="text-[#e0e0e0] hover:text-[#42f8f5] transition duration-300">Contact Us</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-[#e0e0e0] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1c222d] mt-4 rounded-lg shadow-lg">
+            <a href="#home" class="block px-4 py-2 text-[#e0e0e0] hover:bg-[#12151a]">Home</a>
+            <a href="#tools" class="block px-4 py-2 text-[#e0e0e0] hover:bg-[#12151a]">Tools</a>
+            <a href="#about-us" class="block px-4 py-2 text-[#e0e0e0] hover:bg-[#12151a]">About Us</a>
+            <a href="#how-to-use-tools" class="block px-4 py-2 text-[#e0e0e0] hover:bg-[#12151a]">Guide</a>
+            <a href="#contact-us" class="block px-4 py-2 text-[#e0e0e0] hover:bg-[#12151a]">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="bg-[#1c222d] text-white py-20 px-4 sm:px-6 lg:px-8 text-center rounded-b-lg shadow-lg">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-[#ffffff]">
+                Unlock Your Potential with Our <span class="text-[#42f8f5]">Essential Tools</span>
+            </h1>
+            <p class="text-lg sm:text-xl mb-10 text-[#c5d1de] opacity-90">
+                Discover a suite of powerful tools designed to enhance your productivity and streamline your workflow. Join us and experience the difference.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-[#42f8f5] hover:bg-[#3ff7f3] text-[#0d0f14] px-8 py-3 rounded-full shadow-lg transform transition duration-300 hover:scale-105 btn-primary-glow">Get Started</button>
+                <button class="border border-[#42f8f5] text-[#42f8f5] hover:bg-[#42f8f5] hover:text-[#0d0f14] px-8 py-3 rounded-full shadow-lg transform transition duration-300 hover:scale-105">Learn More</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0d0f14]">
+        <div class="container mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#ffffff]">Explore Our Diverse Range of Powerful Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Utility Tools -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=Utility+Tools+Icon" alt="Utility Tools Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=Utility+Tools+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">Utility Tools</h3>
+                    <p class="text-[#c5d1de] mb-6">A collection of handy tools for everyday tasks, from calculators to unit converters.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">Explore Utility Tools →</a>
+                </div>
+                <!-- PDF Tools -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=PDF+Tools+Icon" alt="PDF Tools Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=PDF+Tools+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">PDF Tools</h3>
+                    <p class="text-[#c5d1de] mb-6">Manage your PDF documents with ease: merge, split, compress, and convert.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">Explore PDF Tools →</a>
+                </div>
+                <!-- More Tools -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=More+Tools+Icon" alt="More Tools Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=More+Tools+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">More Tools</h3>
+                    <p class="text-[#c5d1de] mb-6">Discover additional specialized tools to boost your productivity in various domains.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">Discover All Tools →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#12151a]">
+        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="order-2 lg:order-1">
+                <p class="text-[#42f8f5] text-lg font-semibold mb-3">Our Story</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-[#ffffff]">Empowering You with Innovation</h2>
+                <p class="text-[#c5d1de] mb-8 leading-relaxed">
+                    At Multi-Tool Hub, we believe in simplifying complex tasks and enhancing productivity for everyone. Our mission is to provide a comprehensive suite of user-friendly and powerful tools that streamline your daily workflow.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <h4 class="text-xl font-semibold mb-2 text-[#e0e0e0]">Our Vision</h4>
+                        <p class="text-[#c5d1de]">To be the leading platform for innovative digital tools, fostering efficiency and empowering users worldwide.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-2 text-[#e0e0e0]">Our Commitment</h4>
+                        <p class="text-[#c5d1de]">We are dedicated to continuous improvement, user satisfaction, and delivering reliable solutions that make a real difference.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="bg-[#42f8f5] hover:bg-[#3ff7f3] text-[#0d0f14] px-6 py-3 rounded-lg shadow-md transition duration-300 btn-primary-glow">Learn More</button>
+                    <button class="border border-[#42f8f5] text-[#42f8f5] hover:bg-[#42f8f5] hover:text-[#0d0f14] px-6 py-3 rounded-lg shadow-md transition duration-300">Contact Us →</button>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 w-full h-80 sm:h-96 lg:h-full rounded-lg shadow-lg overflow-hidden slideshow-container">
+                <img class="mySlides" src="https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+1" alt="Team Image 1" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+1';"/>
+                <img class="mySlides" src="https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+2" alt="Team Image 2" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+2';"/>
+                <img class="mySlides" src="https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+3" alt="Team Image 3" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c222d/c5d1de?text=Team+Image+3';"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Tools Section -->
+    <section id="how-to-use-tools" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0d0f14]">
+        <div class="container mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#ffffff]">How to Get the Most Out of Our Tools: A Comprehensive Guide</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article Part 1: Getting Started -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=Quick+Start+Icon" alt="Getting Started Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=Quick+Start+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">Part 1: Quick Start Guide</h3>
+                    <p class="text-[#c5d1de] mb-6">Learn the basics of navigating our platform and accessing your desired tools efficiently.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">Read Guide →</a>
+                </div>
+                <!-- Article Part 2: Advanced Features -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=Advanced+Features+Icon" alt="Advanced Features Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=Advanced+Features+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">Part 2: Exploring Advanced Features</h3>
+                    <p class="text-[#c5d1de] mb-6">Dive into advanced functionalities and customization options to optimize your workflow.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">Discover Features →</a>
+                </div>
+                <!-- Article Part 3: Tips & Tricks -->
+                <div class="bg-[#1c222d] p-6 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/400x300/12151a/c5d1de?text=Tips+and+Tricks+Icon" alt="Tips and Tricks Image" class="rounded-lg object-cover w-full h-48 mb-6" onerror="this.onerror=null; this.src='https://placehold.co/400x300/12151a/c5d1de?text=Tips+and+Tricks+Icon';"/>
+                    <h3 class="text-xl font-semibold mb-3 text-[#e0e0e0]">Part 3: Pro Tips & Troubleshooting</h3>
+                    <p class="text-[#c5d1de] mb-6">Maximize your efficiency with expert tips and find solutions to common issues.</p>
+                    <a href="#" class="text-[#42f8f5] hover:underline">View Tips →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#12151a] text-center">
+        <div class="container mx-auto max-w-2xl">
+            <div class="text-[#42f8f5] text-3xl mb-6">★★★★★</div>
+            <p class="text-2xl sm:text-3xl italic leading-relaxed mb-8 text-[#e0e0e0]">
+                "Using these tools has transformed my workflow. I can't imagine going back to how I worked before!"
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <div class="w-16 h-16 rounded-full bg-[#1c222d] flex items-center justify-center text-[#c5d1de] text-2xl font-bold">BB</div>
+                <div>
+                    <p class="text-lg font-semibold text-[#e0e0e0]">Bharat Bhushan</p>
+                    <p class="text-[#c5d1de]">Founder & CEO, Multi-Tool Hub</p>
+                </div>
+                <!-- Placeholder for company logo -->
+                <img src="https://placehold.co/100x40/1c222d/c5d1de?text=Your+Company+Logo" alt="Your Company Logo Placeholder" class="h-10 ml-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x40/1c222d/c5d1de?text=Your+Company+Logo';"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact-us" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0d0f14]">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-1 gap-12 items-center">
+            <div class="order-2 lg:order-1">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-center text-[#ffffff]">Get In Touch</h2>
+                <p class="text-[#c5d1de] mb-8 leading-relaxed text-center max-w-2xl mx-auto">
+                    Have questions, feedback, or need support? Fill out the form below, and we'll get back to you as soon as possible.
+                </p>
+                <form class="space-y-6 max-w-xl mx-auto">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-[#e0e0e0] mb-1">Your Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 border border-[#1c222d] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42f8f5] bg-[#12151a] text-[#e0e0e0]" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-[#e0e0e0] mb-1">Your Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 border border-[#1c222d] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42f8f5] bg-[#12151a] text-[#e0e0e0]" placeholder="john.doe@example.com" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-[#e0e0e0] mb-1">Your Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full p-3 border border-[#1c222d] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#42f8f5] bg-[#12151a] text-[#e0e0e0]" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#42f8f5] hover:bg-[#3ff7f3] text-[#0d0f14] px-6 py-3 rounded-lg shadow-md transition duration-300 btn-primary-glow">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1c222d] text-[#e0e0e0] py-12 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-[#ffffff]">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Home Page</a></li>
+                    <li><a href="#about-us" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">About Us</a></li>
+                    <li><a href="#tools" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Tools</a></li>
+                    <li><a href="#contact-us" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Contact Us</a></li>
+                    <li><a href="#how-to-use-tools" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">How to Use Tools</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect With Us -->
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-[#ffffff]">Connect With Us</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Support Center</a></li>
+                    <li><a href="#" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">FAQs</a></li>
+                    <li><a href="#" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Feedback</a></li>
+                    <li><a href="#" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Careers</a></li>
+                    <li><a href="#" class="text-[#c5d1de] hover:text-[#42f8f5] transition duration-300">Events</a></li>
+                </ul>
+            </div>
+
+            <!-- Stay Connected -->
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-[#ffffff]">Stay Connected</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="flex items-center text-[#c5d1de] hover:text-[#42f8f5] transition duration-300"><img src="https://placehold.co/20x20/42f8f5/0d0f14?text=F" class="mr-2 rounded-full" alt="Facebook Icon" onerror="this.onerror=null; this.src='https://placehold.co/20x20/42f8f5/0d0f14?text=F';"/> Facebook</a></li>
+                    <li><a href="#" class="flex items-center text-[#c5d1de] hover:text-[#42f8f5] transition duration-300"><img src="https://placehold.co/20x20/42f8f5/0d0f14?text=I" class="mr-2 rounded-full" alt="Instagram Icon" onerror="this.onerror=null; this.src='https://placehold.co/20x20/42f8f5/0d0f14?text=I';"/> Instagram</a></li>
+                    <li><a href="#" class="flex items-center text-[#c5d1de] hover:text-[#42f8f5] transition duration-300"><img src="https://placehold.co/20x20/42f8f5/0d0f14?text=X" class="mr-2 rounded-full" alt="X Icon" onerror="this.onerror=null; this.src='https://placehold.co/20x20/42f8f5/0d0f14?text=X';"/> X</a></li>
+                    <li><a href="#" class="flex items-center text-[#c5d1de] hover:text-[#42f8f5] transition duration-300"><img src="https://placehold.co/20x20/42f8f5/0d0f14?text=L" class="mr-2 rounded-full" alt="LinkedIn Icon" onerror="this.onerror=null; this.src='https://placehold.co/20x20/42f8f5/0d0f14?text=L';"/> LinkedIn</a></li>
+                    <li><a href="#" class="flex items-center text-[#c5d1de] hover:text-[#42f8f5] transition duration-300"><img src="https://placehold.co/20x20/42f8f5/0d0f14?text=Y" class="mr-2 rounded-full" alt="YouTube Icon" onerror="this.onerror=null; this.src='https://placehold.co/20x20/42f8f5/0d0f14?text=Y';"/> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-[#12151a] mt-8 pt-8 text-center text-[#c5d1de] text-sm">
+            <p>&copy; 2025 Bharat Bhushan. All rights reserved.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="hover:text-[#42f8f5] transition duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-[#42f8f5] transition duration-300">Terms of Use</a>
+                <a href="#" class="hover:text-[#42f8f5] transition duration-300">Cookie Settings</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Slideshow functionality for About Us section
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("mySlides");
+
+        /**
+         * Displays a specific slide in the slideshow.
+         * Hides all slides first, then shows the one at the given index.
+         * @param {number} n - The index of the slide to display.
+         */
+        function showSlides(n) {
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            // Ensure index wraps around if it goes out of bounds
+            if (n >= slides.length) {
+                slideIndex = 0;
+            } else if (n < 0) {
+                slideIndex = slides.length - 1;
+            } else {
+                slideIndex = n;
+            }
+            // Display the current slide
+            if (slides[slideIndex]) { // Check if the slide element exists before accessing
+                slides[slideIndex].style.display = "block";
+            }
+        }
+
+        /**
+         * Advances the slideshow to the next slide automatically.
+         * Calls showSlides with the next index.
+         */
+        function plusSlides() {
+            showSlides(slideIndex + 1);
+        }
+
+        // Initialize the slideshow and start the automatic rotation
+        window.onload = function() {
+            if (slides.length > 0) { // Only start slideshow if there are slides
+                showSlides(slideIndex); // Show the first slide
+                setInterval(plusSlides, 3000); // Change image every 3 seconds
+            }
+        };
+    </script>
+</body>
+</html>
