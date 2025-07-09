@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #6D28D9, #4F46E5);
+            transition: opacity 0.3s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .form-input {
+            background-color: #F8FAFC;
+            border-color: #CBD5E1;
+            transition: all 0.2s ease-in-out;
+        }
+        .form-input:focus {
+            --tw-ring-color: #4F46E5;
+            border-color: #4F46E5;
+            background-color: #FFFFFF;
+        }
+        .contact-info-icon {
+            background-color: #EEF2FF; /* indigo-100 */
+            color: #4338CA; /* indigo-700 */
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false, formSubmitted: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 sm:py-24">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">Contact Us</h1>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">We welcome your inquiries. Whether you have a question, feedback, or a partnership proposal, please don't hesitate to reach out. Our team is ready to assist you.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg order-2 md:order-1">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Send a Message</h2>
+                    <div x-show="formSubmitted" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md mb-6" role="alert">
+                      <p class="font-bold">Thank You!</p>
+                      <p>Your message has been sent successfully. We will get back to you shortly.</p>
+                    </div>
+                    <form @submit.prevent="formSubmitted = true" x-show="!formSubmitted">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700">Full Name</label>
+                                <input type="text" name="name" id="name" autocomplete="name" required class="mt-1 block w-full rounded-md form-input shadow-sm sm:text-sm p-3">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700">Email Address</label>
+                                <input id="email" name="email" type="email" autocomplete="email" required class="mt-1 block w-full rounded-md form-input shadow-sm sm:text-sm p-3">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-slate-700">Subject</label>
+                                <input type="text" name="subject" id="subject" required class="mt-1 block w-full rounded-md form-input shadow-sm sm:text-sm p-3">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-700">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="mt-1 block w-full rounded-md form-input shadow-sm sm:text-sm p-3"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white btn-primary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                    Submit Inquiry
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Contact Info -->
+                <div class="space-y-8 order-1 md:order-2">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full contact-info-icon flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-800">General Inquiries</h3>
+                            <p class="text-slate-600">For all general questions, please email us at:</p>
+                            <a href="mailto:contact@bharatbhushan.com" class="font-medium text-indigo-600 hover:text-indigo-800">contact@bharatbhushan.com.np</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full contact-info-icon flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-800">Mailing Address</h3>
+                            <p class="text-slate-600">Bharat Bhushan Inc.<br>Nagarjun 5, Kathmandu<br>Bagmati Province, Nepal</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full contact-info-icon flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-800">Business Hours</h3>
+                            <p class="text-slate-600">Monday – Friday: 9:00 AM – 5:00 PM (NPT)<br>Saturday & Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
