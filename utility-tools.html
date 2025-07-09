@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Utility Tools for Every Need - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .hero-bg {
+            background-color: #FFFBEB; /* amber-100 */
+            background-image: radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.1), transparent 50%);
+        }
+        .btn-primary {
+            background-color: #F59E0B; /* amber-500 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #D97706; /* amber-600 */
+        }
+        .tool-card {
+            background-color: white;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .category-title {
+            border-bottom: 2px solid #F59E0B; /* amber-500 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+                    Your Complete Digital Toolbox
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-700">
+                    A comprehensive collection of free, powerful, and easy-to-use utility tools to solve your everyday digital challenges.
+                </p>
+                <div class="mt-10">
+                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg hover:shadow-xl transition">
+                        Browse All Utility Tools
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                
+                <!-- Time & Date Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">Time & Date Tools</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Epoch Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert Unix timestamps to human-readable dates and back.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Time Zone Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Find the time difference between cities and time zones worldwide.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Date Difference Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Calculate the duration in days, months, and years between two dates.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Age Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Calculate your age down to the day from your date of birth.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Countdown Timer Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create a shareable countdown timer for your events and deadlines.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Calendar Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Generate a printable calendar for any month or year.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Developer Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">Developer Tools</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">JSON Formatter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Validate, format, and beautify your JSON data for readability.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">HTML/CSS/JS Minifier</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Reduce the file size of your code for faster website loading.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Code Beautifier</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Format messy HTML, CSS, and JavaScript code to make it clean and readable.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Regex Tester</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Test and debug your regular expressions with real-time matching.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">URL Encoder/Decoder</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Encode or decode strings to be safely used in URLs.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Base64 Encode/Decode</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Encode your data into Base64 format or decode it back to its original form.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Health & Finance Calculators -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">Health & Finance Calculators</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">BMI Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Calculate your Body Mass Index (BMI) to assess your weight status.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Loan EMI Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Calculate your Equated Monthly Installment (EMI) for loans.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Scientific Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">An online calculator with advanced functions for scientific calculations.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Percentage Calculator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Quickly solve various percentage-based math problems.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Currency Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Get real-time exchange rates for currencies across the globe.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Security & Network Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">Security & Network Tools</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Password Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create strong, secure, and random passwords to protect your accounts.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Password Strength Checker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Analyze the strength of your password and get tips for improvement.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">IP Address Finder</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Find your public IP address and get location details.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">SSL Checker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Check the SSL certificate status and details for any domain.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+                
+                <!-- Content & Design Tools -->
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">Content & Design Tools</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Color Picker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Pick colors from a wheel and convert between HEX, RGB, and HSL.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Lorem Ipsum Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Generate placeholder text for your design mockups and layouts.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Case Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert text between UPPERCASE, lowercase, Title Case, etc.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Word & Character Counter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Count words, characters, and sentences in your text in real-time.</p><a href="#" class="text-sm font-semibold text-amber-600 hover:text-amber-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
