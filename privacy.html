@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .prose h1, .prose h2, .prose h3 {
+            color: #1E293B; /* slate-800 */
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+        .prose p, .prose li, .prose strong {
+            color: #334155; /* slate-700 */
+        }
+        .prose a {
+            color: #4F46E5; /* indigo-600 */
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        .prose a:hover {
+            color: #3730A3; /* indigo-800 */
+        }
+        .prose ul {
+            list-style-position: outside;
+            padding-left: 1.25rem;
+        }
+        .prose li::marker {
+            color: #94A3B8; /* slate-400 */
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .content-wrapper {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem; /* 16px */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 sm:py-24">
+        <div class="container mx-auto px-6">
+            <div class="content-wrapper max-w-4xl mx-auto p-8 sm:p-12">
+                <article class="prose lg:prose-lg max-w-none">
+                    <div class="text-center mb-10">
+                        <h1 class="text-4xl">Privacy Policy</h1>
+                        <p class="text-slate-500"><strong>Effective Date:</strong> July 9, 2025</p>
+                    </div>
+
+                    <p>Bharat Bhushan ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy outlines our practices concerning the collection, use, and disclosure of your information through the use of our website and associated services (collectively, the "Service").</p>
+
+                    <h2>1. Scope of This Policy</h2>
+                    <p>This policy applies to all information collected through our Service. By accessing or using our Service, you agree to the terms of this Privacy Policy. If you do not agree, please do not access or use the Service.</p>
+
+                    <h2>2. Information We Collect</h2>
+                    <p>We collect information to provide and improve our Service. The types of information we collect are:</p>
+                    <ul>
+                        <li><strong>Service Data:</strong> When you use our online tools, you may upload documents, text, or other data for processing. This data is processed on our servers solely to perform the requested function. We do not access the content of your files unless required for support purposes, with your explicit consent. All uploaded data is automatically and permanently deleted from our servers within a few hours.</li>
+                        <li><strong>Usage Information:</strong> We automatically collect technical data when you interact with our Service. This includes your IP address, browser type and version, operating system, referral source, pages viewed, and the dates/times of your visits. This information is used for analytical purposes to improve the user experience.</li>
+                    </ul>
+
+                    <h2>3. Use of Information</h2>
+                    <p>The information we collect is used for the following purposes:</p>
+                    <ul>
+                        <li>To provide, operate, and maintain our Service.</li>
+                        <li>To improve, personalize, and expand our Service.</li>
+                        <li>To understand and analyze how you use our Service for internal analytics and reporting.</li>
+                        <li>To maintain the security and integrity of our systems and prevent fraudulent activity.</li>
+                        <li>To comply with legal obligations and respond to lawful requests from public authorities.</li>
+                    </ul>
+
+                    <h2>4. Data Security and Retention</h2>
+                    <p>We implement robust administrative, technical, and physical security measures to protect the information we handle. As stated, any files or data you upload for processing are retained only for the short period necessary to perform the service and are then permanently deleted. While we take data protection seriously, no system is completely secure, and we cannot guarantee the absolute security of your information.</p>
+
+                    <h2>5. Third-Party Services</h2>
+                    <p>We do not sell, trade, or rent your personal information to third parties. We may share aggregated, non-personally identifiable usage data with third-party service providers for analytics and hosting purposes, under strict confidentiality agreements.</p>
+
+                    <h2>6. Your Data Protection Rights</h2>
+                    <p>Depending on your location, you may have certain rights regarding your personal information, such as the right to access or delete your data. Since we do not maintain user accounts or store personal data long-term, most of these rights are not applicable. For any queries regarding your data, please contact us.</p>
+                    
+                    <h2>7. Policy on Children's Information</h2>
+                    <p>Our Service is not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will take steps to delete such information.</p>
+
+                    <h2>8. Changes to This Privacy Policy</h2>
+                    <p>We may update this Privacy Policy periodically to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by posting the new policy on this page and updating the "Effective Date."</p>
+
+                    <h2>9. Contact Information</h2>
+                    <p>Should you have any questions or concerns about this Privacy Policy or our data practices, please do not hesitate to contact us via our <a href="contact.html">Contact Us page</a> or by email at <a href="mailto:privacy@bharatbhushan.com">privacy@bharatbhushan.com</a>.</p>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
