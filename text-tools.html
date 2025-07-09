@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Text Tools - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .hero-bg {
+            background-color: #F1F5F9; /* slate-100 */
+            background-image: radial-gradient(circle at 50% 0, rgba(100, 116, 139, 0.08), transparent 50%);
+        }
+        .btn-primary {
+            background-color: #475569; /* slate-600 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #334155; /* slate-700 */
+        }
+        .tool-card {
+            background-color: white;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .category-title {
+            border-bottom: 2px solid #64748B; /* slate-500 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .faq-item {
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+                    The Ultimate Online Text Toolkit
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-700">
+                    From basic counting and formatting to advanced AI-powered writing aids, our comprehensive suite of text tools helps you work with words more effectively.
+                </p>
+                <div class="mt-10">
+                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg hover:shadow-xl transition">
+                        Explore All Text Tools
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                
+                <!-- Basic Text Operations -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">✍️ Basic Text Operations</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Word Counter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Count words in your text instantly.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Character Counter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Count characters with or without spaces.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Text Case Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Switch text to UPPER, lower, or Title Case.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Remove Extra Spaces</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Clean up text by removing double spaces.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Remove Duplicate Lines</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Delete repeated lines from a list or text block.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Find and Replace Text</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Quickly find words and replace them.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Reverse Text</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Flip your text backwards character by character.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Add Line Numbers</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Add sequential numbers to each line of text.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Text Cleaner</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Remove symbols, emojis, and unwanted characters.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Capitalize Sentences</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Capitalize the first letter of each sentence.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Writing & Content Aids -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">📝 Writing & Content Aids</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Grammar Checker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Find and correct grammatical errors in your text.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Spelling Checker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Identify and fix spelling mistakes.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Paraphrasing Tool</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Rewrite articles and sentences to create unique content.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Summarize Text</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Condense long articles into key summary points.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Reading Time Estimator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Calculate the estimated time it takes to read your text.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Accessibility & Conversion -->
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🔊 Accessibility & Conversion</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Text to Speech</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert written text into natural-sounding audio.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Speech to Text</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Transcribe spoken words from audio files into text.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Text Translator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Translate text between multiple languages.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Emoji to Text Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert emojis into their descriptive text names.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">MD5/SHA-1 Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Generate cryptographic hashes from your text.</p><a href="#" class="text-sm font-semibold text-slate-600 hover:text-slate-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-20 sm:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Why Choose Our Text Tools?</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        We focus on speed, privacy, and power to deliver the best experience.
+                    </p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-200 text-slate-600 mx-auto">
+                           <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Blazing Fast</h3>
+                        <p class="mt-2 text-base text-slate-600">Most tools run directly in your browser, providing instant results without any server-side delay.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-200 text-slate-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.017h-.008v-.017z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Completely Private</h3>
+                        <p class="mt-2 text-base text-slate-600">Your text is your own. We do not log, store, or share any of the content you process with our tools.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-200 text-slate-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Always Free & Accessible</h3>
+                        <p class="mt-2 text-base text-slate-600">No sign-ups, no subscriptions, and no limits. All our tools are free to use on any device with a browser.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
