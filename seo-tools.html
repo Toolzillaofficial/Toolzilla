@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free SEO Tools - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .hero-bg {
+            background-color: #EFF6FF; /* blue-100 */
+            background-image: radial-gradient(circle at 50% 0, rgba(59, 130, 246, 0.1), transparent 50%);
+        }
+        .btn-primary {
+            background-color: #3B82F6; /* blue-500 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB; /* blue-600 */
+        }
+        .tool-card {
+            background-color: white;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .faq-item {
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+                    Powerful SEO Tools to Dominate the SERPs
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-700">
+                    Elevate your search engine ranking with our complete suite of free, reliable, and user-friendly SEO tools. Analyze your website, track your competitors, and discover new keywords effortlessly.
+                </p>
+                <div class="mt-10">
+                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg hover:shadow-xl transition">
+                        Explore All SEO Tools
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">A Complete SEO Toolkit</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        From on-page optimization to backlink analysis, we've got you covered.
+                    </p>
+                </div>
+
+                <!-- Tools Grid -->
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Keyword Research Tool -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Keyword Research Tool</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Discover thousands of long-tail keywords, analyze their search volume, and find low-competition opportunities.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- SERP Checker -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">SERP Checker</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Analyze the top search engine results for any keyword in any location. See who ranks and why.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Backlink Analyzer -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Backlink Analyzer</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Check the backlink profile of any website. Discover your competitors' most valuable links.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Website SEO Checker -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Website SEO Checker</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Get a comprehensive SEO audit of your website. Identify technical issues and on-page optimization opportunities.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Meta Tag Generator -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Meta Tag Generator</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Create perfectly optimized meta title and description tags to improve your click-through rate from search results.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Robots.txt Generator -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Robots.txt Generator</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Easily create a robots.txt file to guide search engine crawlers on which pages of your site to index or ignore.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- DA/PA Checker -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">DA/PA Checker</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Check the Domain Authority (DA) and Page Authority (PA) of any website to gauge its ranking strength.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Keyword Density Checker -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Keyword Density Checker</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Analyze the keyword density of a webpage to ensure it's optimized without keyword stuffing.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Use Tool &rarr;</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Choose Us Section -->
+        <section class="py-20 sm:py-24">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Why Choose Our SEO Tools?</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        We provide the data and insights you need to succeed, without the complexity or cost.
+                    </p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Accurate & Reliable Data</h3>
+                        <p class="mt-2 text-base text-slate-600">Our tools are powered by robust data sources to give you accurate insights you can trust for your SEO strategy.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.5c-.586.79-.586 2.006 0 2.796l.879.659z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Completely Free</h3>
+                        <p class="mt-2 text-base text-slate-600">Get unlimited access to all our SEO tools without any subscriptions, hidden fees, or usage limits. Seriously.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">User-Friendly Interface</h3>
+                        <p class="mt-2 text-base text-slate-600">No steep learning curve. Our tools are designed to be intuitive for both SEO beginners and seasoned experts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        Your questions, answered.
+                    </p>
+                </div>
+                <div class="mt-12 space-y-4" x-data="{ open: 1 }">
+                    <details class="faq-item p-4 rounded-lg" :open="open === 1" @click.prevent="open = (open === 1 ? null : 1)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Where does the SEO data come from?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 1}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">We aggregate data from a variety of trusted, publicly available sources and APIs, then process it to provide you with comprehensive and actionable insights. This includes clickstream data and search engine results pages.</p>
+                    </details>
+                    <details class="faq-item p-4 rounded-lg" :open="open === 2" @click.prevent="open = (open === 2 ? null : 2)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Are there really no usage limits?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 2}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">That's correct. Our tools are free to use without any daily or monthly limits. We believe powerful SEO tools should be accessible to everyone, from small business owners to large agencies.</p>
+                    </details>
+                    <details class="faq-item p-4 rounded-lg" :open="open === 3" @click.prevent="open = (open === 3 ? null : 3)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Is my website data and research kept private?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 3}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">Yes. We take your privacy very seriously. We do not store, share, or sell any of the data you enter into our tools. Your searches, keyword research, and website analyses are your own. Please review our <a href="privacy.html" class="text-indigo-600 hover:underline">Privacy Policy</a> for more information.</p>
+                    </details>
+                    <details class="faq-item p-4 rounded-lg" :open="open === 4" @click.prevent="open = (open === 4 ? null : 4)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Do I need to create an account to use the tools?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 4}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">No account is needed. You can start using all of our SEO tools immediately without any registration or sign-up process. Just navigate to the tool and begin your analysis.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
