@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Creative Tools - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .hero-bg {
+            background-color: #1E1B4B; /* indigo-950 */
+            background-image: 
+                radial-gradient(at 20% 25%, hsla(222, 80%, 50%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 80% 75%, hsla(280, 80%, 50%, 0.3) 0px, transparent 50%);
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #8B5CF6, #EC4899);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.25);
+        }
+        .tool-card {
+            background-color: white;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .category-title {
+            border-bottom: 2px solid #A855F7; /* purple-500 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .faq-item {
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg text-white">
+            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+                    Unleash Your Creativity with <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">AI</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-indigo-200">
+                    Generate stunning images, captivating videos, compelling articles, and imaginative stories from simple text prompts. Welcome to the future of content creation.
+                </p>
+                <div class="mt-10">
+                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg">
+                        Start Creating with AI
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Our Suite of AI Tools</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        Harness the power of artificial intelligence for your creative and professional projects.
+                    </p>
+                </div>
+
+                <!-- Tools Grid -->
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Text to Image Generator -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Text to Image Generator</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Describe your vision in words and watch as AI brings it to life as a unique, high-quality image.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Text to Video Generator -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Text to Video Generator</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Turn a simple text prompt into a short, dynamic video clip, complete with AI-generated scenes.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- Image to Video Generator -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9A2.25 2.25 0 004.5 18.75z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">Image to Video Generator</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Animate a static image, adding subtle motion and effects to create an engaging video clip.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- AI Article Writer -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">AI Article Writer</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Provide a topic or keyword, and our AI will generate a well-structured, informative article draft for you.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- AI Story Writer -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">AI Story Writer</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Spark your imagination. Give the AI a premise, character, or setting, and let it weave a unique story.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                    <!-- AI Chat Bot -->
+                    <div class="tool-card p-8 flex flex-col">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 01-2.53-.388m-5.168-4.47M3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25H3z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-slate-900">AI Chat Bot</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Engage in conversation, ask questions, brainstorm ideas, and get instant answers from our advanced AI assistant.</p>
+                        <a href="#" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Use Tool &rarr;</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Choose Us Section -->
+        <section class="py-20 sm:py-24">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">The Future of Creation, Simplified</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        We combine state-of-the-art technology with an intuitive interface so you can focus on what matters: your ideas.
+                    </p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 text-purple-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Cutting-Edge Models</h3>
+                        <p class="mt-2 text-base text-slate-600">Our tools are powered by the latest generative AI models, ensuring high-quality, relevant, and creative outputs.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 text-purple-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.17 48.17 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.397 48.397 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Simple Prompting</h3>
+                        <p class="mt-2 text-base text-slate-600">No complex commands to learn. Just type your idea in plain language and let the AI do the heavy lifting.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 text-purple-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Free for Everyone</h3>
+                        <p class="mt-2 text-base text-slate-600">We believe in democratizing creativity. All our AI tools are free to use, with generous limits for all users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">AI Questions, Answered</h2>
+                </div>
+                <div class="mt-12 space-y-4" x-data="{ open: 1 }">
+                    <details class="faq-item p-4 rounded-lg" :open="open === 1" @click.prevent="open = (open === 1 ? null : 1)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Who owns the content I generate?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 1}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">You do. You own the rights to the images, videos, and text you create using our AI tools and can use them for personal or commercial projects, in accordance with our Terms of Service.</p>
+                    </details>
+                    <details class="faq-item p-4 rounded-lg" :open="open === 2" @click.prevent="open = (open === 2 ? null : 2)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Is there a limit to how many times I can use the tools?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 2}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">To ensure fair access for everyone, there are generous daily limits on generations. These limits are high enough for most creative and professional use cases and reset every 24 hours.</p>
+                    </details>
+                    <details class="faq-item p-4 rounded-lg" :open="open === 3" @click.prevent="open = (open === 3 ? null : 3)">
+                        <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">
+                            Is the AI-generated content unique?
+                            <svg class="w-5 h-5 transition-transform" :class="{'rotate-45': open === 3}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="mt-4 text-slate-600">Yes. Each generation is created from scratch by the AI based on your unique prompt. While similar prompts may produce similar styles or themes, the exact output will be unique to your request.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
