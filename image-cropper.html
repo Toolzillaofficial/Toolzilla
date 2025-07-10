@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper Tool - Bharat Bhushan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Cropper.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function imageCropper() {
+            return {
+                cropper: null,
+                imageUploaded: false,
+                imagePreviewUrl: null,
+                croppedImageUrl: null,
+                activeRatio: 'custom',
+
+                handleImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (!file || !file.type.startsWith('image/')) return;
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.imagePreviewUrl = e.target.result;
+                        this.imageUploaded = true;
+                        this.croppedImageUrl = null; // Reset previous result
+                        
+                        this.$nextTick(() => {
+                            this.initCropper();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                initCropper() {
+                    if (this.cropper) {
+                        this.cropper.destroy();
+                    }
+                    const image = document.getElementById('imageToCrop');
+                    this.cropper = new Cropper(image, {
+                        aspectRatio: NaN, // Start with free ratio
+                        viewMode: 1,
+                        background: false,
+                        autoCropArea: 0.8,
+                    });
+                },
+
+                setAspectRatio(ratio) {
+                    if (this.cropper) {
+                        this.cropper.setAspectRatio(ratio);
+                        this.activeRatio = isNaN(ratio) ? 'custom' : this.getRatioString(ratio);
+                    }
+                },
+                
+                getRatioString(ratio) {
+                    if (ratio === 1/1) return '1:1';
+                    if (ratio === 4/3) return '4:3';
+                    if (ratio === 16/9) return '16:9';
+                    if (ratio === 2/3) return '2:3';
+                    return 'custom';
+                },
+
+                cropImage() {
+                    if (!this.cropper) return;
+                    
+                    const canvas = this.cropper.getCroppedCanvas({
+                        width: 1024, // Set a reasonable max width for quality
+                        imageSmoothingQuality: 'high',
+                    });
+
+                    this.croppedImageUrl = canvas.toDataURL('image/png');
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Cropper.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .btn-primary {
+            background-color: #06B6D4; /* cyan-500 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background-color: #0891B2; /* cyan-600 */
+        }
+        .btn-secondary {
+            background-color: #f1f5f9; /* slate-100 */
+            color: #475569; /* slate-600 */
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .btn-secondary:hover {
+            background-color: #e2e8f0; /* slate-200 */
+        }
+        .btn-secondary.active {
+            background-color: #06B6D4;
+            color: white;
+            border-color: #06B6D4;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input-button {
+            border: 2px dashed #CBD5E1;
+            background-color: #F8FAFC;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .file-input-button:hover {
+            border-color: #06B6D4;
+            background-color: #ECFEFF;
+        }
+        .file-input {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        /* Cropper.js needs a block-level image */
+        #imageToCrop {
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="imageCropper()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="image-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Image Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-6xl mx-auto">
+            <div class="p-6 border-b text-center">
+                <h1 class="text-2xl font-bold text-slate-800">Image Cropper</h1>
+                <p class="text-slate-500 mt-1">Easily crop your images with precision.</p>
+            </div>
+            
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left Column: Controls & Upload -->
+                <div class="space-y-6">
+                    <!-- Step 1: Upload -->
+                    <div>
+                        <h2 class="font-semibold text-slate-700 mb-2">Step 1: Upload Image</h2>
+                        <div class="file-input-wrapper w-full">
+                            <div class="file-input-button rounded-lg">
+                                <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                                <p class="mt-2 text-sm text-slate-600">Click to upload or drag and drop</p>
+                                <p class="text-xs text-slate-500">PNG, JPG, WEBP, etc.</p>
+                            </div>
+                            <input type="file" @change="handleImageUpload" accept="image/*" class="file-input h-full w-full">
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Choose Ratio -->
+                    <div x-show="imageUploaded">
+                        <h2 class="font-semibold text-slate-700 mb-2">Step 2: Choose Aspect Ratio</h2>
+                        <div class="flex flex-wrap gap-2">
+                            <button @click="setAspectRatio(NaN)" :class="{'active': activeRatio === 'custom'}" class="btn-secondary px-4 py-2 text-sm font-semibold rounded-lg">Custom</button>
+                            <button @click="setAspectRatio(1/1)" :class="{'active': activeRatio === '1:1'}" class="btn-secondary px-4 py-2 text-sm font-semibold rounded-lg">1:1</button>
+                            <button @click="setAspectRatio(4/3)" :class="{'active': activeRatio === '4:3'}" class="btn-secondary px-4 py-2 text-sm font-semibold rounded-lg">4:3</button>
+                            <button @click="setAspectRatio(16/9)" :class="{'active': activeRatio === '16:9'}" class="btn-secondary px-4 py-2 text-sm font-semibold rounded-lg">16:9</button>
+                            <button @click="setAspectRatio(2/3)" :class="{'active': activeRatio === '2:3'}" class="btn-secondary px-4 py-2 text-sm font-semibold rounded-lg">2:3 (Portrait)</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Crop & Download -->
+                    <div x-show="imageUploaded">
+                        <h2 class="font-semibold text-slate-700 mb-2">Step 3: Crop & Download</h2>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button @click="cropImage" class="w-full btn-primary rounded-lg px-5 py-3 text-base font-semibold shadow-md">Crop Image</button>
+                            <a x-show="croppedImageUrl" :href="croppedImageUrl" download="cropped-image.png" class="w-full text-center bg-green-600 text-white rounded-lg px-5 py-3 text-base font-semibold shadow-md hover:bg-green-500">Download Cropped Image</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cropped Image Preview -->
+                    <div x-show="croppedImageUrl" class="text-center">
+                        <h3 class="font-semibold text-slate-700 mb-2">Result</h3>
+                        <img :src="croppedImageUrl" alt="Cropped Image Preview" class="max-w-full mx-auto rounded-lg shadow-md border">
+                    </div>
+                </div>
+
+                <!-- Right Column: Image Cropper -->
+                <div class="bg-slate-100 rounded-lg p-4 min-h-[300px] flex items-center justify-center">
+                    <div x-show="imageUploaded" class="w-full">
+                        <img id="imageToCrop" :src="imagePreviewUrl">
+                    </div>
+                    <div x-show="!imageUploaded" class="text-slate-500">
+                        <p>Your image will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
