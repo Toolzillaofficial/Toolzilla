@@ -56,6 +56,9 @@
         .tool-card-purple { background-color: #FAF5FF; }
         .tool-card-amber { background-color: #FFFBEB; }
         .tool-card-slate { background-color: #F8FAFC; }
+        .tool-card-cyan { background-color: #ECFEFF; }
+        .tool-card-indigo { background-color: #EEF2FF; }
+
     </style>
 </head>
 <body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
@@ -64,9 +67,8 @@
     <header class="hero-bg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo -->
-            <a href="#" class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-3">
                 <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center">
-                    <!-- Accurate SVG for the 'X' Logo -->
                     <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
@@ -76,8 +78,8 @@
             </a>
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-4">
-                 <a href="Youtube-tools.html" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50">Start with YouTube Tools</a>
-                 <a href="#" class="rounded-full btn-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-90">Explore All Tools</a>
+                 <a href="youtube-tools.html" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50">Start with YouTube Tools</a>
+                 <a href="#all-tools" class="rounded-full btn-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-90">Explore All Tools</a>
             </nav>
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
@@ -92,8 +94,8 @@
         <!-- Mobile Menu -->
         <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Explore All Tools</a>
-                <a href="Youtube-tools.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Start with YouTube Tools</a>
+                <a href="#all-tools" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Explore All Tools</a>
+                <a href="youtube-tools.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Start with YouTube Tools</a>
             </div>
         </div>
     </header>
@@ -106,17 +108,17 @@
                     Free Online Tools for <span class="main-heading-highlight">Everyone</span>
                 </h1>
                 <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
-                    Discover hundreds of powerful tools to enhance your productivity. From YouTube utilities to SEO optimization - all completely free and easy to use.
+                    Discover hundreds of powerful tools to enhance your productivity. From YouTube utilities to AI-powered content creation - all completely free and easy to use.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#" class="w-full sm:w-auto rounded-full btn-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Explore All Tools</a>
-                    <a href="#" class="w-full sm:w-auto rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 shadow-lg border border-slate-200 hover:bg-slate-50">Start with YouTube Tools</a>
+                    <a href="#all-tools" class="w-full sm:w-auto rounded-full btn-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Explore All Tools</a>
+                    <a href="ai-tools.html" class="w-full sm:w-auto rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 shadow-lg border border-slate-200 hover:bg-slate-50">Try our AI Tools</a>
                 </div>
 
                 <!-- Feature Highlights -->
                 <div class="mt-20 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div class="text-center">
-                        <p class="text-3xl font-bold text-indigo-600">50+</p>
+                        <p class="text-3xl font-bold text-indigo-600">100+</p>
                         <p class="text-sm text-slate-500 mt-1">Free Tools</p>
                     </div>
                     <div class="text-center">
@@ -136,17 +138,41 @@
         </section>
 
         <!-- All-in-One Tool Collection Section -->
-        <section class="py-20 sm:py-24 bg-white">
+        <section id="all-tools" class="py-20 sm:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-2xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">All-in-One Tool Collection</h2>
                     <p class="mt-4 text-lg text-slate-600">
-                        Access hundreds of free online tools to boost your productivity. From YouTube utilities to SEO optimization, we've got everything you need.
+                        Access hundreds of free online tools to boost your productivity. From video utilities to AI content generation, we've got everything you need.
                     </p>
                 </div>
 
                 <!-- Tools Grid -->
-                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- AI Tools Card -->
+                    <div class="tool-card tool-card-indigo card-hover">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-200">
+                               <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a2.25 2.25 0 01-1.473-1.473L12.25 18l1.938-.648a2.25 2.25 0 011.473-1.473L17.75 14l.648 1.938a2.25 2.25 0 011.473 1.473L21.75 18l-1.938.648a2.25 2.25 0 01-1.473 1.473z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-slate-900">AI Tools</h3>
+                        </div>
+                        <p class="mt-4 text-base text-slate-600">Generate text, images, and videos with our creative AI suite.</p>
+                        <a href="ai-tools.html" class="mt-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Explore Tools &rarr;</a>
+                    </div>
+
+                    <!-- Image Tools -->
+                    <div class="tool-card tool-card-cyan card-hover">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-cyan-200">
+                               <svg class="h-6 w-6 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-slate-900">Image Tools</h3>
+                        </div>
+                        <p class="mt-4 text-base text-slate-600">Edit, convert, and create with AI-powered image tools.</p>
+                        <a href="image-tools.html" class="mt-6 inline-block text-sm font-semibold text-cyan-600 hover:text-cyan-500">Explore Tools &rarr;</a>
+                    </div>
+
                     <!-- YouTube Tools Card -->
                     <div class="tool-card tool-card-red card-hover">
                         <div class="flex items-center gap-4">
@@ -159,13 +185,7 @@
                             <h3 class="text-xl font-semibold text-slate-900">YouTube Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Download, convert, and analyze YouTube content.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                        <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› Video Downloader</li>
-                            <li>› Thumbnail Extractor</li>
-                            <li>› Channel Analyzer</li>
-                        </ul>
-                        <a href="Youtube-tools.html" class="mt-6 inline-block text-sm font-semibold text-red-600 hover:text-red-500">Explore Tools &rarr;</a>
+                        <a href="youtube-tools.html" class="mt-6 inline-block text-sm font-semibold text-red-600 hover:text-red-500">Explore Tools &rarr;</a>
                     </div>
                     
                     <!-- SEO Tools Card -->
@@ -179,12 +199,6 @@
                             <h3 class="text-xl font-semibold text-slate-900">SEO Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Optimize your website for search engines.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                        <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› Keyword Research</li>
-                            <li>› Meta Tag Generator</li>
-                            <li>› Site Analyzer</li>
-                        </ul>
                         <a href="seo-tools.html" class="mt-6 inline-block text-sm font-semibold text-blue-600 hover:text-blue-500">Explore Tools &rarr;</a>
                     </div>
 
@@ -199,12 +213,6 @@
                             <h3 class="text-xl font-semibold text-slate-900">PDF Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Merge, split, compress, and convert PDF files.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                         <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› PDF Merger</li>
-                            <li>› PDF Splitter</li>
-                            <li>› PDF Compressor</li>
-                        </ul>
                         <a href="pdf-tools.html" class="mt-6 inline-block text-sm font-semibold text-green-600 hover:text-green-500">Explore Tools &rarr;</a>
                     </div>
                     
@@ -212,19 +220,11 @@
                     <div class="tool-card tool-card-purple card-hover">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-purple-200">
-                               <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                               </svg>
+                               <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
                             </div>
                             <h3 class="text-xl font-semibold text-slate-900">Video Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Edit, convert, and compress video files.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                         <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› Video Converter</li>
-                            <li>› Video Compressor</li>
-                            <li>› Video Editor</li>
-                        </ul>
                         <a href="video-tools.html" class="mt-6 inline-block text-sm font-semibold text-purple-600 hover:text-purple-500">Explore Tools &rarr;</a>
                     </div>
 
@@ -232,19 +232,11 @@
                     <div class="tool-card tool-card-amber card-hover">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-200">
-                               <svg class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.664 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.474-4.474c-.04-.58-.297-1.128-.738-1.562l-2.21-2.21a4.5 4.5 0 00-6.334 6.334l2.21 2.21a4.5 4.5 0 001.562.738z" />
-                               </svg>
+                               <svg class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.664 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.474-4.474c-.04-.58-.297-1.128-.738-1.562l-2.21-2.21a4.5 4.5 0 00-6.334 6.334l2.21 2.21a4.5 4.5 0 001.562.738z" /></svg>
                             </div>
                             <h3 class="text-xl font-semibold text-slate-900">Utility Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Helpful everyday tools and calculators.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                         <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› QR Generator</li>
-                            <li>› Password Generator</li>
-                            <li>› Unit Converter</li>
-                        </ul>
                         <a href="utility-tools.html" class="mt-6 inline-block text-sm font-semibold text-amber-600 hover:text-amber-500">Explore Tools &rarr;</a>
                     </div>
 
@@ -252,19 +244,11 @@
                     <div class="tool-card tool-card-slate card-hover">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-slate-200">
-                               <svg class="h-6 w-6 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                               </svg>
+                               <svg class="h-6 w-6 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
                             </div>
                             <h3 class="text-xl font-semibold text-slate-900">Text Tools</h3>
                         </div>
                         <p class="mt-4 text-base text-slate-600">Process and format text content.</p>
-                        <p class="mt-4 text-sm font-semibold text-slate-700">Popular Tools:</p>
-                         <ul class="mt-2 space-y-2 text-sm text-slate-500">
-                            <li>› Text Counter</li>
-                            <li>› Case Converter</li>
-                            <li>› Text Formatter</li>
-                        </ul>
                         <a href="text-tools.html" class="mt-6 inline-block text-sm font-semibold text-slate-600 hover:text-slate-500">Explore Tools &rarr;</a>
                     </div>
                 </div>
@@ -322,8 +306,8 @@
                      <a href="#" class="flex items-center space-x-3">
                         <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center">
                             <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
-                               <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
-                               <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
                             </svg>
                         </div>
                         <span class="text-2xl font-bold text-white">Bharat Bhushan</span>
@@ -341,35 +325,35 @@
                 <!-- Links Grid -->
                 <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 class="text-sm font-semibold text-white">YouTube Tools</h3>
+                        <h3 class="text-sm font-semibold text-white">AI Tools</h3>
                         <ul class="mt-4 space-y-3">
-                            <li><a href="#" class="text-sm hover:text-white">Video Downloader</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Thumbnail Extractor</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Channel Analyzer</a></li>
+                            <li><a href="ai-tools.html" class="text-sm hover:text-white">Text to Image</a></li>
+                            <li><a href="ai-tools.html" class="text-sm hover:text-white">Article Writer</a></li>
+                            <li><a href="ai-tools.html" class="text-sm hover:text-white">AI Chat Bot</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-sm font-semibold text-white">SEO Tools</h3>
+                        <h3 class="text-sm font-semibold text-white">Image Tools</h3>
                         <ul class="mt-4 space-y-3">
-                            <li><a href="#" class="text-sm hover:text-white">Keyword Research</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Meta Tag Generator</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Site Analyzer</a></li>
+                            <li><a href="image-tools.html" class="text-sm hover:text-white">Image Converter</a></li>
+                            <li><a href="image-tools.html" class="text-sm hover:text-white">Background Remover</a></li>
+                            <li><a href="image-tools.html" class="text-sm hover:text-white">Image Upscaler</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-sm font-semibold text-white">PDF Tools</h3>
+                        <h3 class="text-sm font-semibold text-white">Video Tools</h3>
                         <ul class="mt-4 space-y-3">
-                            <li><a href="#" class="text-sm hover:text-white">PDF Merger</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">PDF Splitter</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">PDF Compressor</a></li>
+                            <li><a href="video-tools.html" class="text-sm hover:text-white">Video Converter</a></li>
+                            <li><a href="video-tools.html" class="text-sm hover:text-white">Video Compressor</a></li>
+                            <li><a href="video-tools.html" class="text-sm hover:text-white">Video Editor</a></li>
                         </ul>
                     </div>
                      <div>
-                        <h3 class="text-sm font-semibold text-white">Video Tools</h3>
+                        <h3 class="text-sm font-semibold text-white">PDF Tools</h3>
                         <ul class="mt-4 space-y-3">
-                            <li><a href="#" class="text-sm hover:text-white">Video Converter</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Video Compressor</a></li>
-                            <li><a href="#" class="text-sm hover:text-white">Video Editor</a></li>
+                            <li><a href="pdf-tools.html" class="text-sm hover:text-white">PDF Merger</a></li>
+                            <li><a href="pdf-tools.html" class="text-sm hover:text-white">PDF Splitter</a></li>
+                            <li><a href="pdf-tools.html" class="text-sm hover:text-white">PDF Compressor</a></li>
                         </ul>
                     </div>
                 </div>
@@ -391,4 +375,3 @@
 
 </body>
 </html>
-
