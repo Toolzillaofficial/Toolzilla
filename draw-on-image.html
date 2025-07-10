@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw on Image Tool - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function imageDrawer() {
+            return {
+                imageUrl: null,
+                img: null,
+                isDrawing: false,
+                drawColor: '#ff0000',
+                lineWidth: 5,
+                canvas: null,
+                ctx: null,
+                history: [],
+                downloadFilename: 'drawn-image.png',
+
+                handleImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (!file || !file.type.startsWith('image/')) return;
+                    this.downloadFilename = file.name.replace(/\.[^/.]+$/, "") + "_drawn.png";
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.imageUrl = e.target.result;
+                        
+                        this.$nextTick(() => {
+                            // Now that the DOM is updated, we can safely get refs and setup the canvas
+                            this.canvas = this.$refs.drawCanvas;
+                            this.ctx = this.canvas.getContext('2d');
+                            this.setupCanvasEvents();
+
+                            this.img = new Image();
+                            this.img.onload = () => {
+                                this.canvas.width = this.img.width;
+                                this.canvas.height = this.img.height;
+                                this.history = []; // Reset history for new image
+                                this.redraw();
+                            };
+                            this.img.src = this.imageUrl;
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                setupCanvasEvents() {
+                    // Add event listeners for both mouse and touch
+                    this.canvas.addEventListener('mousedown', (e) => this.startDrawing(e));
+                    this.canvas.addEventListener('mouseup', (e) => this.stopDrawing(e));
+                    this.canvas.addEventListener('mouseleave', (e) => this.stopDrawing(e));
+                    this.canvas.addEventListener('mousemove', (e) => this.draw(e));
+                    
+                    this.canvas.addEventListener('touchstart', (e) => this.startDrawing(e), { passive: false });
+                    this.canvas.addEventListener('touchend', (e) => this.stopDrawing(e), { passive: false });
+                    this.canvas.addEventListener('touchmove', (e) => this.draw(e), { passive: false });
+                },
+
+                getCoordinates(event) {
+                    event.preventDefault(); // Prevent scrolling on touch
+                    const rect = this.canvas.getBoundingClientRect();
+                    const scaleX = this.canvas.width / rect.width;
+                    const scaleY = this.canvas.height / rect.height;
+                    
+                    let clientX, clientY;
+                    if (event.touches && event.touches.length > 0) {
+                        clientX = event.touches[0].clientX;
+                        clientY = event.touches[0].clientY;
+                    } else {
+                        clientX = event.clientX;
+                        clientY = event.clientY;
+                    }
+                    
+                    return {
+                        x: (clientX - rect.left) * scaleX,
+                        y: (clientY - rect.top) * scaleY
+                    };
+                },
+
+                startDrawing(event) {
+                    this.isDrawing = true;
+                    const { x, y } = this.getCoordinates(event);
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x, y);
+                },
+
+                stopDrawing() {
+                    if (!this.isDrawing) return;
+                    this.ctx.closePath();
+                    this.isDrawing = false;
+                    this.saveState();
+                },
+
+                draw(event) {
+                    if (!this.isDrawing) return;
+                    const { x, y } = this.getCoordinates(event);
+                    this.ctx.lineTo(x, y);
+                    this.ctx.strokeStyle = this.drawColor;
+                    this.ctx.lineWidth = this.lineWidth;
+                    this.ctx.lineCap = 'round';
+                    this.ctx.lineJoin = 'round';
+                    this.ctx.stroke();
+                },
+
+                saveState() {
+                    if(!this.ctx) return;
+                    this.history.push(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
+                },
+
+                undo() {
+                    if (this.history.length > 1) {
+                        this.history.pop();
+                        this.ctx.putImageData(this.history[this.history.length - 1], 0, 0);
+                    } else {
+                        this.clearCanvas();
+                    }
+                },
+
+                clearCanvas() {
+                    this.history = [];
+                    this.redraw();
+                },
+
+                redraw() {
+                    if(!this.ctx || !this.img) return;
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.ctx.drawImage(this.img, 0, 0);
+                    this.saveState();
+                },
+
+                downloadImage() {
+                    const link = document.createElement('a');
+                    link.download = this.downloadFilename;
+                    link.href = this.canvas.toDataURL('image/png');
+                    link.click();
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        #drawCanvas { cursor: crosshair; touch-action: none; }
+    </style>
+</head>
+<body class="text-slate-800" x-data="imageDrawer()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm"><svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg></div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="image-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Image Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-6xl mx-auto">
+            <div class="p-6 border-b text-center">
+                <h1 class="text-2xl font-bold text-slate-800">Draw on Image</h1>
+                <p class="text-slate-500 mt-1">Unleash your creativity by drawing directly on your images.</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                 <div x-show="!imageUrl" class="w-full max-w-lg mx-auto">
+                    <div class="relative overflow-hidden inline-block w-full">
+                        <div class="border-2 dashed border-slate-300 bg-slate-50 p-8 text-center cursor-pointer rounded-lg hover:border-cyan-500 hover:bg-cyan-50" @click="$refs.fileInput.click()">
+                            <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            <p class="mt-2 text-sm text-slate-600">Click to upload image</p>
+                        </div>
+                        <input type="file" x-ref="fileInput" @change="handleImageUpload" accept="image/*" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+                    </div>
+                </div>
+
+                <div x-show="imageUrl" class="space-y-4">
+                    <div class="flex justify-center bg-slate-200 p-2 rounded-lg">
+                        <canvas x-ref="drawCanvas" id="drawCanvas" class="max-w-full rounded-md shadow-md"></canvas>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-lg flex flex-wrap items-center justify-center gap-4">
+                        <div>
+                            <label for="color" class="text-sm font-semibold">Color:</label>
+                            <input type="color" id="color" x-model="drawColor" class="ml-2 align-middle">
+                        </div>
+                        <div>
+                            <label for="lineWidth" class="text-sm font-semibold">Brush Size:</label>
+                            <input type="range" id="lineWidth" x-model.number="lineWidth" min="1" max="50" class="ml-2 align-middle">
+                            <span x-text="lineWidth" class="text-sm font-mono ml-2"></span>
+                        </div>
+                        <button @click="undo()" class="px-4 py-2 text-sm bg-slate-300 rounded-md hover:bg-slate-400">Undo</button>
+                        <button @click="clearCanvas()" class="px-4 py-2 text-sm bg-red-200 text-red-800 rounded-md hover:bg-red-300">Clear Drawing</button>
+                    </div>
+                     <div class="flex flex-col sm:flex-row gap-4">
+                        <a @click.prevent="downloadImage()" href="#" class="w-full text-center bg-green-600 text-white rounded-lg px-5 py-3 text-base font-semibold shadow-md hover:bg-green-500">Download Image</a>
+                        <div class="relative overflow-hidden inline-block w-full">
+                           <button class="w-full text-center bg-slate-200 text-slate-700 rounded-lg px-5 py-3 text-base font-semibold shadow-sm hover:bg-slate-300" @click="$refs.fileInput.click()">Change Image</button>
+                           <input type="file" x-ref="fileInput" @change="handleImageUpload" accept="image/*" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
