@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Video Converter Online - Bharat Bhushan</title>
+    <meta name="description" content="Convert your video files to any format (MP4, MOV, AVI, MKV, GIF) with our free, secure, and high-quality online video converter. No software needed.">
+    <link rel="canonical" href="https://www.yourwebsite.com/video-converter-online.html" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function universalVideoConverter() {
+            return {
+                file: null,
+                isLoading: false,
+                statusMessage: '',
+                errorMessage: '',
+                downloadUrl: null,
+                fileName: '',
+                inputFormat: 'mov',
+                outputFormat: 'mp4',
+                progress: 0,
+                videoFormats: [
+                    { value: 'mp4', text: 'MP4' }, { value: 'mov', text: 'MOV' },
+                    { value: 'avi', text: 'AVI' }, { value: 'mkv', text: 'MKV' },
+                    { value: 'webm', text: 'WebM' }, { value: 'flv', text: 'FLV' },
+                    { value: 'wmv', text: 'WMV' }, { value: 'gif', text: 'GIF' },
+                ],
+
+                handleFileSelect(event) {
+                    this.file = event.target.files[0];
+                    if (this.file) {
+                        this.fileName = this.file.name;
+                        this.resetState();
+                    }
+                },
+
+                resetState() {
+                    this.isLoading = false;
+                    this.statusMessage = '';
+                    this.errorMessage = '';
+                    this.downloadUrl = null;
+                    this.progress = 0;
+                },
+
+                createFormData(params, file) {
+                    const formData = new FormData();
+                    for (const key in params) { formData.append(key, params[key]); }
+                    formData.append("file", file);
+                    return formData;
+                },
+
+                async startConversion() {
+                    if (!this.file) {
+                        this.errorMessage = "Please upload a video file first!";
+                        return;
+                    }
+                    if (!this.inputFormat || !this.outputFormat) {
+                        this.errorMessage = "Please select both input and output formats.";
+                        return;
+                    }
+
+                    this.resetState();
+                    this.isLoading = true;
+                    
+                    const API_KEY = "api_production_f8a11825d1b1fac1f4b74eabb7c15b77d143eaa33e75ac220430e2e778895c8e.68350d414f4a6dcc14dd9441.686f6a57f1c8aedfefb69027";
+                    const headers = {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    };
+
+                    try {
+                        this.statusMessage = "Initializing conversion job...";
+                        const jobRes = await fetch('https://api.freeconvert.com/v1/process/jobs', {
+                            method: 'POST',
+                            headers,
+                            body: JSON.stringify({
+                                tasks: {
+                                    "import-1": { "operation": "import/upload" },
+                                    "convert-1": { "operation": "convert", "input": "import-1", "input_format": this.inputFormat, "output_format": this.outputFormat },
+                                    "export-1": { "operation": "export/url", "input": ["convert-1"] }
+                                }
+                            })
+                        });
+
+                        if (!jobRes.ok) throw new Error('Failed to create conversion job.');
+                        const jobData = await jobRes.json();
+                        const uploadTask = Object.values(jobData.tasks).find(t => t.operation === "import/upload");
+
+                        this.statusMessage = "Uploading your video...";
+                        this.progress = 5;
+                        await fetch(uploadTask.result.form.url, {
+                            method: 'POST',
+                            body: this.createFormData(uploadTask.result.form.parameters, this.file)
+                        });
+                        this.progress = 10;
+
+                        this.statusMessage = "Processing your video...";
+                        let jobId = jobData.id;
+                        let status = "";
+
+                        while (status !== "completed") {
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+
+                            const statusRes = await fetch(`https://api.freeconvert.com/v1/process/jobs/${jobId}`, { headers });
+                            if (!statusRes.ok) throw new Error('Could not fetch job status.');
+                            
+                            const statusData = await statusRes.json();
+                            status = statusData.status;
+
+                            if (status === "processing") {
+                                const convertTask = Object.values(statusData.tasks).find(t => t.operation === "convert");
+                                if (convertTask && convertTask.percent) {
+                                    this.progress = 10 + Math.round(convertTask.percent * 0.9);
+                                    this.statusMessage = `Converting...`;
+                                }
+                            }
+
+                            if (status === "failed") throw new Error("Video conversion failed. Please try again.");
+                        }
+                        
+                        const finalJobRes = await fetch(`https://api.freeconvert.com/v1/process/jobs/${jobId}`, { headers });
+                        const finalJobData = await finalJobRes.json();
+                        const exportTask = Object.values(finalJobData.tasks).find(t => t.operation === "export/url");
+                        
+                        this.downloadUrl = exportTask.result.files[0].url;
+                        this.statusMessage = "Conversion Complete!";
+                        this.progress = 100;
+
+                    } catch (error) {
+                        console.error("Conversion Error:", error);
+                        this.errorMessage = error.message;
+                    } finally {
+                        this.isLoading = false;
+                    }
+                },
+                
+                get downloadFilename() {
+                    if (!this.fileName) return `converted_video.${this.outputFormat}`;
+                    const nameWithoutExtension = this.fileName.split('.').slice(0, -1).join('.');
+                    return `${nameWithoutExtension}.${this.outputFormat}`;
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #A855F7; color: white; transition: all 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #9333EA; transform: scale(1.05); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .progress-bar-bg { background-color: #E5E7EB; }
+        .progress-bar-fill { background-color: #A855F7; transition: width 0.5s ease-in-out; }
+    </style>
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Video Converter Online",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "description": "A free online tool to convert video files between various formats like MP4, MOV, AVI, MKV, and more. Secure, fast, and no software installation required.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+</head>
+<body class="text-slate-800" x-data="universalVideoConverter()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="video-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Video Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-3xl mx-auto">
+            <div class="p-8 border-b text-center">
+                <h1 class="text-3xl font-bold text-slate-800">Video Converter Online</h1>
+                <p class="text-slate-500 mt-2">Convert your video files to any format with just a few clicks.</p>
+            </div>
+            
+            <div class="p-8 space-y-8">
+                <!-- Step 1: Upload -->
+                <div class="w-full max-w-lg mx-auto">
+                    <div x-show="!file">
+                        <label for="videoInput" class="w-full cursor-pointer bg-purple-50 border-2 border-dashed border-purple-200 rounded-xl p-8 hover:bg-purple-100 hover:border-purple-300 transition-colors flex flex-col items-center justify-center">
+                            <svg class="mx-auto h-12 w-12 text-purple-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                            <span class="mt-2 block font-semibold text-purple-700">Choose a file to upload</span>
+                            <span class="mt-1 block text-sm text-slate-500">Or drag and drop it here</span>
+                        </label>
+                        <input type="file" id="videoInput" @change="handleFileSelect" accept="video/*" class="sr-only">
+                    </div>
+                    <div x-show="file" class="text-center bg-purple-50 border-2 border-purple-200 rounded-xl p-4">
+                        <p class="font-semibold text-purple-800">File Selected</p>
+                        <p class="text-sm text-slate-600 truncate" x-text="fileName"></p>
+                        <button @click="$refs.fileInput.click()" class="mt-2 text-sm font-semibold text-purple-600 hover:underline">Change file</button>
+                        <input type="file" x-ref="fileInput" @change="handleFileSelect" accept="video/*" class="sr-only">
+                    </div>
+                </div>
+
+                <!-- Step 2: Choose Formats -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center" x-show="file">
+                    <div class="sm:col-span-1">
+                        <label for="inputFormat" class="block text-sm font-semibold text-slate-700 mb-1 text-left">From</label>
+                        <select id="inputFormat" x-model="inputFormat" class="w-full rounded-md border-slate-300 shadow-sm p-3">
+                            <template x-for="format in videoFormats" :key="format.value"><option :value="format.value" x-text="format.text"></option></template>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-1 flex justify-center pt-6">
+                        <svg class="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="outputFormat" class="block text-sm font-semibold text-slate-700 mb-1 text-left">To</label>
+                        <select id="outputFormat" x-model="outputFormat" class="w-full rounded-md border-slate-300 shadow-sm p-3">
+                             <template x-for="format in videoFormats" :key="format.value"><option :value="format.value" x-text="format.text"></option></template>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 3: Convert Button -->
+                <div x-show="file">
+                    <button @click="startConversion" class="btn-primary rounded-full px-8 py-4 text-lg font-semibold shadow-lg w-full" :disabled="isLoading">
+                        <span x-show="!isLoading">Convert Now</span>
+                        <span x-show="isLoading">Converting...</span>
+                    </button>
+                </div>
+
+                <!-- Status/Output Section -->
+                <div class="p-4 min-h-[120px] flex flex-col items-center justify-center" x-show="isLoading || downloadUrl || errorMessage">
+                    <div x-show="isLoading" class="w-full max-w-md text-center">
+                        <p class="text-slate-600 font-semibold mb-2" x-text="statusMessage"></p>
+                        <div class="w-full progress-bar-bg rounded-full h-6 overflow-hidden">
+                            <div class="progress-bar-fill h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" :style="`width: ${progress}%`">
+                                <span x-text="`${progress}%`"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div x-show="errorMessage" x-text="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert"></div>
+
+                    <div x-show="downloadUrl" class="text-center space-y-4 animate-bounce">
+                        <h2 class="text-2xl font-bold text-green-600" x-text="statusMessage"></h2>
+                        <a :href="downloadUrl" :download="downloadFilename" class="inline-block bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 transition font-semibold text-lg shadow-lg">
+                            Download Converted File
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEO Content Section -->
+        <div class="max-w-4xl mx-auto mt-16 px-6 text-slate-600 prose prose-slate">
+            <h2 class="text-2xl font-bold text-slate-800">Your Go-To Online Video Conversion Tool</h2>
+            <p>Our free online video converter is the perfect solution for all your media conversion needs. Whether you need to convert a MOV file from your iPhone to a more compatible MP4, turn a large AVI into a web-friendly WebM, or create an animated GIF from a video clip, our tool handles it all. We support a wide range of formats, ensuring you can convert any video to any other format quickly and easily.</p>
+            <h3>Why Use Our Online Video Converter?</h3>
+            <ul>
+                <li><strong>No Software Installation:</strong> Convert files directly in your browser without downloading or installing any software.</li>
+                <li><strong>Privacy Focused:</strong> We automatically delete your files from our servers a few hours after conversion, ensuring your data remains private.</li>
+                <li><strong>High-Quality Conversions:</strong> Our tool uses advanced conversion engines to maintain the best possible quality for your video and audio.</li>
+                <li><strong>Fast and Free:</strong> Enjoy fast conversion speeds and unlimited use, completely free of charge.</li>
+            </ul>
+        </div>
+    </main>
+
+</body>
+</html>
