@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Image Tool - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function imageFlipper() {
+            return {
+                imageUrl: null,
+                downloadUrl: null,
+                downloadFilename: 'flipped_image.png',
+                img: null,
+                flipH: 1, // 1 for normal, -1 for flipped
+                flipV: 1, // 1 for normal, -1 for flipped
+
+                handleImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (!file || !file.type.startsWith('image/')) return;
+                    this.downloadFilename = file.name.replace(/\.[^/.]+$/, "") + "_flipped.png";
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.imageUrl = e.target.result;
+                        this.flipH = 1;
+                        this.flipV = 1;
+                        this.img = new Image();
+                        this.img.onload = () => this.drawImage();
+                        this.img.src = this.imageUrl;
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                flip(direction) {
+                    if (direction === 'horizontal') this.flipH *= -1;
+                    if (direction === 'vertical') this.flipV *= -1;
+                    this.drawImage();
+                },
+
+                drawImage() {
+                    const canvas = document.getElementById('canvasFlip');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = this.img.width;
+                    canvas.height = this.img.height;
+                    
+                    ctx.translate(this.flipH === -1 ? canvas.width : 0, this.flipV === -1 ? canvas.height : 0);
+                    ctx.scale(this.flipH, this.flipV);
+                    ctx.drawImage(this.img, 0, 0);
+                    
+                    // Reset transform
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+                    this.downloadUrl = canvas.toDataURL('image/png');
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #06B6D4; color: white; transition: background-color 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #0891B2; }
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; }
+        .file-input-button { border: 2px dashed #CBD5E1; background-color: #F8FAFC; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .file-input-button:hover { border-color: #06B6D4; background-color: #ECFEFF; }
+        .file-input { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+    </style>
+</head>
+<body class="text-slate-800" x-data="imageFlipper()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm"><svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg></div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="image-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Image Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <div class="p-6 border-b text-center">
+                <h1 class="text-2xl font-bold text-slate-800">Flip Image</h1>
+                <p class="text-slate-500 mt-1">Flip your images horizontally or vertically.</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div x-show="!imageUrl" class="w-full max-w-lg mx-auto">
+                    <div class="file-input-wrapper w-full">
+                        <div class="file-input-button rounded-lg"><svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg><p class="mt-2 text-sm text-slate-600">Click to upload or drag and drop</p></div>
+                        <input type="file" @change="handleImageUpload" accept="image/*" class="file-input h-full w-full">
+                    </div>
+                </div>
+
+                <div x-show="imageUrl" class="space-y-4">
+                    <div class="flex justify-center">
+                        <canvas id="canvasFlip" class="max-w-full rounded-lg shadow-md border"></canvas>
+                    </div>
+                    <div class="flex justify-center items-center gap-4">
+                        <button @click="flip('horizontal')" class="p-3 bg-slate-200 rounded-lg hover:bg-slate-300 font-semibold flex items-center gap-2"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.18-3.182m-3.182-4.991v4.99" /></svg> Flip Horizontal</button>
+                        <button @click="flip('vertical')" class="p-3 bg-slate-200 rounded-lg hover:bg-slate-300 font-semibold flex items-center gap-2"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662m18 0c0 1.232-.046-2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.678 48.678 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.092-1.21-.138-2.43-.138-3.662m18 0h-2.25m-13.5 0H3.75m15.75 0l-3-3m0 0l-3 3m-3.75 0l3-3m0 0l3 3" /></svg> Flip Vertical</button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a :href="downloadUrl" :download="downloadFilename" class="w-full text-center bg-green-600 text-white rounded-lg px-5 py-3 text-base font-semibold shadow-md hover:bg-green-500">Download Flipped Image</a>
+                         <div class="file-input-wrapper w-full">
+                           <button class="w-full text-center bg-slate-200 text-slate-700 rounded-lg px-5 py-3 text-base font-semibold shadow-sm hover:bg-slate-300">Change Image</button>
+                           <input type="file" @change="handleImageUpload" accept="image/*" class="file-input h-full w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
