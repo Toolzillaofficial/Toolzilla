@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compress your video files easily and quickly using Bharat Bhushan's Free Online Video Compressor Tool. Supports all major formats with no watermark.">
+  <meta name="keywords" content="video compressor, compress video online, mp4 compressor, Bharat Bhushan tools, reduce video size">
+  <meta name="author" content="Bharat Bhushan">
+  <title>Free Video Compressor Tool – Bharat Bhushan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input, button {
+      padding: 12px;
+      margin: 10px;
+      font-size: 16px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+
+    #progress-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto;
+      height: 20px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      display: none;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #4caf50;
+      text-align: center;
+      color: white;
+      line-height: 20px;
+      transition: width 0.3s;
+    }
+
+    #downloadLink {
+      display: block;
+      margin-top: 25px;
+      font-size: 18px;
+      color: blue;
+    }
+
+    footer {
+      margin-top: 50px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Video Compressor Tool</h1>
+  <p>Powered by <strong>Bharat Bhushan</strong></p>
+
+  <input type="file" id="videoInput" accept="video/*">
+  <br>
+  <button onclick="startCompression()">Compress Video</button>
+  <div id="status"></div>
+
+  <div id="progress-container">
+    <div id="progress-bar">0%</div>
+  </div>
+
+  <a id="downloadLink" href="#" target="_blank"></a>
+
+  <footer>
+    &copy; 2025 Bharat Bhushan. All rights reserved.
+  </footer>
+
+  <script>
+    const API_KEY = "api_production_c2aa9fd03458abbaff35c01d914c3cc7f605b1c11fd20484b5d9b9660aa969ac.68350d414f4a6dcc14dd9441.686f739bf1c8aedfefb690c6";
+
+    async function startCompression() {
+      const file = document.getElementById('videoInput').files[0];
+      if (!file) {
+        alert("Please choose a video file.");
+        return;
+      }
+
+      document.getElementById('status').textContent = "Creating compression job...";
+      document.getElementById('progress-container').style.display = "block";
+      updateProgress(5);
+
+      const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      };
+
+      const jobResponse = await fetch("https://api.freeconvert.com/v1/process/jobs", {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          tasks: {
+            "import-1": { "operation": "import/upload" },
+            "compress-1": {
+              "operation": "compress",
+              "input": "import-1",
+              "engine": "video",
+              "engine_version": "1",
+              "compression": "medium"
+            },
+            "export-1": {
+              "operation": "export/url",
+              "input": ["compress-1"]
+            }
+          }
+        })
+      });
+
+      const jobData = await jobResponse.json();
+      const uploadTask = Object.values(jobData.tasks).find(t => t.operation === "import/upload");
+
+      document.getElementById('status').textContent = "Uploading video...";
+      updateProgress(20);
+
+      await fetch(uploadTask.result.form.url, {
+        method: "POST",
+        body: createFormData(uploadTask.result.form.parameters, file)
+      });
+
+      document.getElementById('status').textContent = "Compressing video...";
+      updateProgress(35);
+
+      let jobId = jobData.id;
+      let status = "";
+
+      let pollCount = 0;
+
+      while (status !== "completed") {
+        const statusResponse = await fetch(`https://api.freeconvert.com/v1/process/jobs/${jobId}`, { headers });
+        const statusData = await statusResponse.json();
+        status = statusData.status;
+
+        if (status === "failed") {
+          document.getElementById('status').textContent = "Compression failed!";
+          updateProgress(0);
+          return;
+        }
+
+        if (status === "completed") {
+          updateProgress(100);
+          const exportTask = Object.values(statusData.tasks).find(t => t.operation === "export/url");
+          const outputUrl = exportTask.result.files[0].url;
+
+          document.getElementById('status').textContent = "Compression complete!";
+          const link = document.getElementById('downloadLink');
+          link.href = outputUrl;
+          link.textContent = "Download Compressed Video";
+          return;
+        }
+
+        pollCount += 1;
+        let progressPercent = 35 + Math.min(60, pollCount * 5);
+        updateProgress(progressPercent);
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+    }
+
+    function updateProgress(percent) {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = percent + "%";
+      progressBar.textContent = percent + "%";
+    }
+
+    function createFormData(params, file) {
+      const formData = new FormData();
+      for (const key in params) {
+        formData.append(key, params[key]);
+      }
+      formData.append("file", file);
+      return formData;
+    }
+  </script>
+</body>
+</html>
