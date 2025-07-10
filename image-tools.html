@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Image Tools - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* slate-50 */
+        }
+        .hero-bg {
+            background-color: #ECFEFF; /* cyan-50 */
+            background-image: radial-gradient(circle at 50% 0, rgba(6, 182, 212, 0.08), transparent 50%);
+        }
+        .btn-primary {
+            background-color: #06B6D4; /* cyan-500 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0891B2; /* cyan-600 */
+        }
+        .tool-card {
+            background-color: white;
+            border: 1px solid #E2E8F0; /* slate-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0; /* slate-200 */
+        }
+        .category-title {
+            border-bottom: 2px solid #06B6D4; /* cyan-500 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .faq-item {
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-2">
+                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
+                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            </nav>
+             <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
+                    <span class="sr-only">Open menu</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+                    The Ultimate Online Image Toolkit
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-700">
+                    Edit, convert, compress, and create stunning visuals with our complete suite of free, AI-powered image tools. Your one-stop shop for all things image-related.
+                </p>
+                <div class="mt-10">
+                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg hover:shadow-xl transition">
+                        Explore All Image Tools
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-20 sm:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                
+                <!-- Image Editing Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🖼️ Image Editing Tools</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Crop Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Cut your image to a specific aspect ratio or size.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Resize Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Change the dimensions of your image by pixel or percentage.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Compress Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Reduce the file size of JPG, PNG, and WebP images.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Rotate Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Rotate your image left or right by 90-degree increments.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Flip Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Flip your image horizontally or vertically.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Blur/Sharpen Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Apply blur or sharpen effects to your photos.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Add Text to Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Overlay custom text with various fonts and colors.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Draw on Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Use a freehand drawing tool to annotate your images.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Image Conversion Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">📐 Image Conversion Tools</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image Converter</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert images to WebP, PNG, JPG, SVG, and more.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">HEIC to JPG</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert Apple's HEIC format to universal JPG.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Combine one or more images into a single PDF file.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image to Text (OCR)</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Extract text from any image using Optical Character Recognition.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image to Grayscale</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert a color image to black and white.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- AI-Powered Image Tools -->
+                <div class="mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🧠 AI-Powered Image Tools</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">AI Image Upscaler</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Increase image resolution without losing quality.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">AI Background Remover</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Automatically remove the background from any image.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">AI Object Remover</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Erase unwanted objects, people, or text from photos.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image Colorizer</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Add realistic color to black and white photos.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">AI Art Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create unique art from a text description.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">AI Avatar Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create custom avatars from your photos.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Face Swap Tool</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Swap faces in photos with AI precision.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image Style Transfer</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Apply the style of famous art to your photos.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+                <!-- Image Analysis & Design Tools -->
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🔍 Analysis & Design Tools</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Metadata Viewer</h3><p class="text-sm text-slate-600 mt-2 flex-grow">View EXIF data of your images (camera, location, etc.).</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Color Palette Extractor</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Generate a color palette from the colors in an image.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Duplicate Image Finder</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Find visually similar or duplicate images.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Reverse Image Search</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Search the web for the source and similar images.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image Collage Maker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Combine multiple photos into a beautiful collage.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Meme Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create memes with your own images and custom text.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Thumbnail Maker</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Design eye-catching thumbnails for YouTube or social media.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Favicon Generator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create a favicon for your website in all required sizes.</p><a href="#" class="text-sm font-semibold text-cyan-600 hover:text-cyan-500 mt-4 self-start">Use Tool &rarr;</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-20 sm:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Creativity Meets Simplicity</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        We provide powerful tools that are easy enough for anyone to use.
+                    </p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 text-cyan-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a2.25 2.25 0 01-1.473-1.473L12.25 18l1.938-.648a2.25 2.25 0 011.473-1.473L17.75 14l.648 1.938a2.25 2.25 0 011.473 1.473L21.75 18l-1.938.648a2.25 2.25 0 01-1.473 1.473z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Powerful AI Engine</h3>
+                        <p class="mt-2 text-base text-slate-600">Our AI tools for background removal, upscaling, and colorization deliver professional results in seconds.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 text-cyan-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.017h-.008v-.017z" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Privacy Guaranteed</h3>
+                        <p class="mt-2 text-base text-slate-600">We respect your privacy. All uploaded images are processed securely and deleted from our servers automatically.</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-cyan-100 text-cyan-600 mx-auto">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+                        </div>
+                        <h3 class="mt-6 text-lg font-semibold text-slate-900">No Software to Install</h3>
+                        <p class="mt-2 text-base text-slate-600">Access all our tools from any device with a modern web browser. No downloads or installations are ever required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+                <div class="flex space-x-6 order-1 md:order-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
