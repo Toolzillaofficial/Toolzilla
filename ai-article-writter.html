@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Article Writer - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        function aiArticleWriter() {
+            return {
+                topic: '',
+                tone: 'Informative',
+                style: 'Professional',
+                length: '500 words',
+                generatedArticle: '',
+                isLoading: false,
+                errorMessage: '',
+                
+                async generateArticle() {
+                    // ===================================================================
+                    // =====> PASTE YOUR GEMINI API KEY HERE <=====
+                    // ===================================================================
+                    const apiKey = "AIzaSyAW_9aKAMj8gq2kvZ6VF6k0nYnZRD4ZKu8"; 
+                    // ===================================================================
+
+                    if (!this.topic) {
+                        this.errorMessage = 'Please enter a topic for the article.';
+                        return;
+                    }
+                    if (!apiKey || apiKey === "PASTE_YOUR_API_KEY_HERE") {
+                        this.errorMessage = 'API Key not configured. Please edit the HTML file to add your key.';
+                        return;
+                    }
+
+                    this.isLoading = true;
+                    this.generatedArticle = '';
+                    this.errorMessage = '';
+
+                    const prompt = `Write a comprehensive, well-structured, and engaging article on the following topic: "${this.topic}". 
+                    
+                    The desired tone for the article is: ${this.tone}.
+                    The writing style should be: ${this.style}.
+                    The approximate length should be around ${this.length}.
+
+                    Please include a clear introduction, a body with several paragraphs, and a concluding summary. Ensure the content is coherent, accurate, and easy to read.`;
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const payload = {
+                        contents: [{
+                            parts: [{ "text": prompt }]
+                        }]
+                    };
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.error.message || 'An unknown API error occurred.');
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.candidates && result.candidates.length > 0) {
+                            this.generatedArticle = result.candidates[0].content.parts[0].text;
+                        } else {
+                            throw new Error('No content was generated. The response may have been blocked.');
+                        }
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        this.errorMessage = `An error occurred: ${error.message}`;
+                    } finally {
+                        this.isLoading = false;
+                    }
+                },
+                copyToClipboard() {
+                    if (!this.generatedArticle) return;
+                    const textarea = document.createElement('textarea');
+                    textarea.value = this.generatedArticle;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    alert('Article copied to clipboard!');
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .page-header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #8B5CF6, #EC4899);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.25);
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #8B5CF6;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-slate-800" x-data="aiArticleWriter()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="ai-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to AI Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <div class="p-6 border-b text-center">
+                <h1 class="text-2xl font-bold text-slate-800">AI Article Writer</h1>
+                <p class="text-slate-500 mt-1">Generate high-quality articles on any topic in seconds.</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <!-- Input Section -->
+                <div>
+                    <label for="topic" class="block text-sm font-semibold text-slate-700">Article Topic</label>
+                    <input type="text" id="topic" x-model="topic" placeholder="e.g., The Future of Renewable Energy" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="tone" class="block text-sm font-semibold text-slate-700">Tone</label>
+                        <select id="tone" x-model="tone" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                            <option>Informative</option>
+                            <option>Casual</option>
+                            <option>Formal</option>
+                            <option>Humorous</option>
+                            <option>Persuasive</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="style" class="block text-sm font-semibold text-slate-700">Style</label>
+                        <select id="style" x-model="style" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                            <option>Professional</option>
+                            <option>Academic</option>
+                            <option>Blog Post</option>
+                            <option>Journalistic</option>
+                            <option>Creative</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="length" class="block text-sm font-semibold text-slate-700">Length</label>
+                        <select id="length" x-model="length" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                            <option>300 words</option>
+                            <option>500 words</option>
+                            <option>1000 words</option>
+                            <option>1500 words</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button @click="generateArticle" class="btn-primary rounded-full px-8 py-3 text-base font-semibold shadow-lg w-full md:w-auto" :disabled="isLoading">
+                        <span x-show="!isLoading">Generate Article</span>
+                        <span x-show="isLoading">Generating...</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="p-6 border-t" x-show="isLoading || generatedArticle || errorMessage">
+                <div x-show="isLoading" class="flex justify-center items-center flex-col space-y-4 p-8">
+                    <div class="loader"></div>
+                    <p class="text-slate-500">AI is writing your article. This may take a moment...</p>
+                </div>
+
+                <div x-show="errorMessage" x-text="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert"></div>
+
+                <div x-show="generatedArticle && !isLoading">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-slate-800">Generated Article</h2>
+                        <button @click="copyToClipboard" class="text-sm bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg">Copy Text</button>
+                    </div>
+                    <div class="prose prose-slate max-w-none p-4 border rounded-md bg-slate-50 whitespace-pre-wrap" x-text="generatedArticle"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
