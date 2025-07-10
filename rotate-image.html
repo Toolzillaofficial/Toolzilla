@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon -->
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Android/Chrome -->
+<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+
+<!-- Fallback .ico -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotate Image Tool - Bharat Bhushan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function imageRotator() {
+            return {
+                imageUrl: null,
+                downloadUrl: null,
+                downloadFilename: 'rotated_image.png',
+                rotation: 0,
+                img: null,
+
+                handleImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (!file || !file.type.startsWith('image/')) return;
+                    this.downloadFilename = file.name.replace(/\.[^/.]+$/, "") + "_rotated.png";
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.imageUrl = e.target.result;
+                        this.rotation = 0;
+                        this.img = new Image();
+                        this.img.onload = () => this.drawImage();
+                        this.img.src = this.imageUrl;
+                    };
+                    reader.readAsDataURL(file);
+                },
+
+                rotate(degrees) {
+                    this.rotation = (this.rotation + degrees) % 360;
+                    this.drawImage();
+                },
+
+                drawImage() {
+                    const canvas = document.getElementById('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const angle = this.rotation * Math.PI / 180;
+                    
+                    // Swap dimensions for 90/270 degree rotations
+                    const isSwapped = Math.abs(this.rotation) % 180 === 90;
+                    const cw = isSwapped ? this.img.height : this.img.width;
+                    const ch = isSwapped ? this.img.width : this.img.height;
+                    
+                    canvas.width = cw;
+                    canvas.height = ch;
+                    
+                    ctx.translate(cw / 2, ch / 2);
+                    ctx.rotate(angle);
+                    ctx.drawImage(this.img, -this.img.width / 2, -this.img.height / 2);
+
+                    this.downloadUrl = canvas.toDataURL('image/png');
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #06B6D4; color: white; transition: background-color 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #0891B2; }
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; }
+        .file-input-button { border: 2px dashed #CBD5E1; background-color: #F8FAFC; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .file-input-button:hover { border-color: #06B6D4; background-color: #ECFEFF; }
+        .file-input { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+    </style>
+</head>
+<body class="text-slate-800" x-data="imageRotator()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm"><svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg></div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="image-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Image Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <div class="p-6 border-b text-center">
+                <h1 class="text-2xl font-bold text-slate-800">Rotate Image</h1>
+                <p class="text-slate-500 mt-1">Rotate your images left or right with a single click.</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div x-show="!imageUrl" class="w-full max-w-lg mx-auto">
+                    <div class="file-input-wrapper w-full">
+                        <div class="file-input-button rounded-lg"><svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg><p class="mt-2 text-sm text-slate-600">Click to upload or drag and drop</p></div>
+                        <input type="file" @change="handleImageUpload" accept="image/*" class="file-input h-full w-full">
+                    </div>
+                </div>
+
+                <div x-show="imageUrl" class="space-y-4">
+                    <div class="flex justify-center">
+                        <canvas id="canvas" class="max-w-full rounded-lg shadow-md border"></canvas>
+                    </div>
+                    <div class="flex justify-center items-center gap-4">
+                        <button @click="rotate(-90)" class="p-3 bg-slate-200 rounded-full hover:bg-slate-300"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg></button>
+                        <button @click="rotate(90)" class="p-3 bg-slate-200 rounded-full hover:bg-slate-300"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" /></svg></button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a :href="downloadUrl" :download="downloadFilename" class="w-full text-center bg-green-600 text-white rounded-lg px-5 py-3 text-base font-semibold shadow-md hover:bg-green-500">Download Rotated Image</a>
+                        <div class="file-input-wrapper w-full">
+                           <button class="w-full text-center bg-slate-200 text-slate-700 rounded-lg px-5 py-3 text-base font-semibold shadow-sm hover:bg-slate-300">Change Image</button>
+                           <input type="file" @change="handleImageUpload" accept="image/*" class="file-input h-full w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
