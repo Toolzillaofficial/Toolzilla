@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter - Free & Online | Bharat Bhushan</title>
+    <meta name="description" content="Convert your images (JPG, PNG, etc.) to a single PDF file for free. Our online image converter is fast, secure, and works in your browser. No uploads required.">
+    <link rel="canonical" href="https://www.yourwebsite.com/image-to-pdf-converter.html" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Alpine.js Function Definition -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('imageToPdf', () => ({
+                files: [],
+                pageOrientation: 'portrait',
+                pageSize: 'a4',
+                isProcessing: false,
+                downloadUrl: null,
+                
+                handleFileChange(event) {
+                    this.reset();
+                    const selectedFiles = Array.from(event.target.files);
+                    selectedFiles.forEach(file => {
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                this.files.push({
+                                    name: file.name,
+                                    url: e.target.result,
+                                    originalFile: file
+                                });
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                },
+
+                removeImage(index) {
+                    this.files.splice(index, 1);
+                    if(this.files.length === 0) {
+                        this.reset();
+                    }
+                },
+
+                reset() {
+                    this.files = [];
+                    this.downloadUrl = null;
+                    this.isProcessing = false;
+                },
+
+                async generatePdf() {
+                    if (this.files.length === 0) {
+                        alert('Please upload at least one image.');
+                        return;
+                    }
+
+                    this.isProcessing = true;
+                    this.downloadUrl = null;
+
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: this.pageOrientation,
+                        unit: 'mm',
+                        format: this.pageSize
+                    });
+
+                    for (let i = 0; i < this.files.length; i++) {
+                        const file = this.files[i];
+                        const img = new Image();
+                        img.src = file.url;
+                        
+                        await new Promise(resolve => {
+                            img.onload = () => {
+                                if (i > 0) {
+                                    pdf.addPage(this.pageSize, this.pageOrientation);
+                                }
+                                const pageWidth = pdf.internal.pageSize.getWidth();
+                                const pageHeight = pdf.internal.pageSize.getHeight();
+                                const margin = 10; // 10mm margin
+                                
+                                const usableWidth = pageWidth - (margin * 2);
+                                const usableHeight = pageHeight - (margin * 2);
+
+                                const imgAspectRatio = img.width / img.height;
+                                const pageAspectRatio = usableWidth / usableHeight;
+
+                                let renderWidth, renderHeight;
+
+                                if (imgAspectRatio > pageAspectRatio) {
+                                    renderWidth = usableWidth;
+                                    renderHeight = renderWidth / imgAspectRatio;
+                                } else {
+                                    renderHeight = usableHeight;
+                                    renderWidth = renderHeight * imgAspectRatio;
+                                }
+
+                                const x = margin + (usableWidth - renderWidth) / 2;
+                                const y = margin + (usableHeight - renderHeight) / 2;
+
+                                pdf.addImage(img, 'JPEG', x, y, renderWidth, renderHeight);
+                                resolve();
+                            };
+                        });
+                    }
+
+                    this.downloadUrl = pdf.output('bloburl');
+                    this.isProcessing = false;
+                }
+            }));
+        });
+    </script>
+    
+    <!-- Alpine.js (deferred to ensure alpine:init listener is registered first) -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #16A34A; color: white; transition: background-color 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #15803D; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; }
+        .file-input-button { border: 2px dashed #CBD5E1; background-color: #F8FAFC; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .file-input-button:hover { border-color: #22C55E; background-color: #F0FDF4; }
+        .file-input { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #16A34A; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    
+</head>
+<body class="text-slate-800" x-data="imageToPdf">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="image-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Image Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-white rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <div class="p-8 border-b text-center">
+                <h1 class="text-3xl font-bold text-slate-800">Image to PDF Converter</h1>
+                <p class="text-slate-500 mt-2">Combine multiple images into a single, professional PDF document.</p>
+            </div>
+            
+            <div class="p-8 space-y-8">
+                <!-- Step 1: Upload -->
+                <div class="w-full max-w-lg mx-auto text-center">
+                    <h2 class="text-lg font-semibold text-slate-700 mb-2">1. Upload Your Images</h2>
+                    <div class="file-input-wrapper w-full">
+                        <label for="image-upload" class="file-input-button rounded-lg flex flex-col items-center justify-center">
+                            <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            <span class="mt-2 block text-sm text-slate-600 font-semibold">Click to upload or drag and drop</span>
+                            <span class="mt-1 block text-xs text-slate-500">Supports JPG, PNG, WebP, etc.</span>
+                        </label>
+                        <input id="image-upload" type="file" @change="handleFileChange" accept="image/*" multiple class="file-input h-full w-full">
+                    </div>
+                </div>
+
+                <!-- Image Previews -->
+                <template x-if="files.length > 0">
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-semibold text-slate-700">Image Queue (<span x-text="files.length"></span>)</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            <template x-for="(file, index) in files" :key="index">
+                                <div class="relative group aspect-square">
+                                    <img :src="file.url" class="w-full h-full object-cover rounded-lg border">
+                                    <button @click="removeImage(index)" class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">&times;</button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Step 2: Options -->
+                <template x-if="files.length > 0">
+                    <div class="space-y-6">
+                        <h2 class="text-lg font-semibold text-slate-700">2. Set PDF Options</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="pageSize" class="block text-sm font-semibold text-slate-700 mb-1">Page Size</label>
+                                <select id="pageSize" x-model="pageSize" class="w-full rounded-md border-slate-300 shadow-sm p-3">
+                                    <option value="a4">A4</option>
+                                    <option value="letter">Letter</option>
+                                    <option value="a3">A3</option>
+                                    <option value="a5">A5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pageOrientation" class="block text-sm font-semibold text-slate-700 mb-1">Orientation</label>
+                                <select id="pageOrientation" x-model="pageOrientation" class="w-full rounded-md border-slate-300 shadow-sm p-3">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Step 3: Generate -->
+                <template x-if="files.length > 0">
+                    <div>
+                        <button @click="generatePdf" class="w-full btn-primary rounded-lg px-5 py-3 text-base font-semibold shadow-md" :disabled="isProcessing">
+                            <span x-show="!isProcessing">Generate PDF</span>
+                            <span x-show="isProcessing" class="flex items-center justify-center"><div class="loader mr-2"></div> Processing...</span>
+                        </button>
+                    </div>
+                </template>
+
+                <!-- Download Section -->
+                <template x-if="downloadUrl">
+                    <div class="text-center p-4 bg-green-50 border-2 border-dashed border-green-200 rounded-xl">
+                         <h2 class="text-xl font-bold text-green-700">Your PDF is Ready!</h2>
+                         <a :href="downloadUrl" download="converted.pdf" class="mt-4 w-full sm:w-auto inline-block bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-semibold text-lg shadow-lg">
+                            Download PDF
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
