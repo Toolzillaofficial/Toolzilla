@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Upscaler - Enhance Photo Resolution Free | Bharat Bhushan</title>
+    <meta name="description" content="Increase the resolution of your images with our free AI Image Upscaler. Enhance details and improve the quality of your photos without losing clarity.">
+    <meta name="keywords" content="ai image upscaler, image enhancer, increase image resolution, photo upscaler, super resolution, bharat bhushan tools">
+    <link rel="canonical" href="https://www.yourwebsite.com/ai-image-upscaler.html" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #111827; color: #E5E7EB; }
+        .page-header { background-color: #1F2937; border-bottom: 1px solid #374151; }
+        .btn-primary { background-image: linear-gradient(to right, #8B5CF6, #EC4899); color: white; transition: all 0.3s ease; }
+        .btn-primary:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 10px 20px rgba(236, 72, 153, 0.25); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; }
+        .file-input-button { border: 2px dashed #4B5563; background-color: #1F2937; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .file-input-button:hover { border-color: #8B5CF6; background-color: #374151; }
+        .file-input { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+        .loader { border: 4px solid #374151; border-top: 4px solid #EC4899; border-radius: 50%; width: 48px; height: 48px; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('aiImageUpscaler', () => ({
+                file: null,
+                originalImageUrl: null,
+                upscaledImageUrl: null,
+                isProcessing: false,
+                errorMessage: '',
+
+                handleFileUpload(event) {
+                    const selectedFile = event.target.files[0];
+                    if (!selectedFile || !selectedFile.type.startsWith('image/')) {
+                        this.file = null;
+                        return;
+                    }
+                    this.file = selectedFile;
+                    this.originalImageUrl = URL.createObjectURL(this.file);
+                    this.resetState();
+                },
+
+                resetState() {
+                    this.isProcessing = false;
+                    this.errorMessage = '';
+                    this.upscaledImageUrl = null;
+                },
+
+                async upscaleImage() {
+                    if (!this.file) {
+                        this.errorMessage = 'Please upload an image first.';
+                        return;
+                    }
+
+                    this.resetState();
+                    this.isProcessing = true;
+
+                    const formData = new FormData();
+                    formData.append('image', this.file);
+
+                    try {
+                        // This now calls your local backend server, which is the correct and robust way.
+                        const response = await fetch('/upscale-image', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (!response.ok) {
+                             const errorResult = await response.json();
+                             throw new Error(errorResult.error || 'An unknown error occurred on the server.');
+                        }
+                        
+                        const imageBlob = await response.blob();
+                        this.upscaledImageUrl = URL.createObjectURL(imageBlob);
+
+                    } catch (error) {
+                        console.error('Upscale Error:', error);
+                        this.errorMessage = `An error occurred: ${error.message}`;
+                    } finally {
+                        this.isProcessing = false;
+                    }
+                },
+
+                get downloadFilename() {
+                    if (!this.file) return `upscaled-image.png`;
+                    const nameWithoutExtension = this.file.name.split('.').slice(0, -1).join('.');
+                    return `${nameWithoutExtension}_upscaled.png`;
+                }
+            }));
+        });
+    </script>
+</head>
+<body class="text-slate-200" x-data="aiImageUpscaler">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-white">Bharat Bhushan</span>
+            </a>
+            <a href="ai-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-300 hover:bg-slate-700 transition-colors">Back to AI Tools</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-6">
+        <div class="bg-[#1F2937] border border-gray-700 rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <div class="p-8 border-b border-gray-700 text-center">
+                <h1 class="text-3xl font-bold text-white">AI Image Upscaler</h1>
+                <p class="text-slate-400 mt-2">Increase the resolution and quality of your images with AI.</p>
+            </div>
+            
+            <div class="p-8 space-y-8">
+                <!-- Upload Section -->
+                <div class="w-full max-w-lg mx-auto text-center">
+                    <div class="file-input-wrapper w-full">
+                        <label for="image-upload" class="file-input-button rounded-lg flex flex-col items-center justify-center">
+                            <svg class="mx-auto h-12 w-12 text-slate-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                            <span class="mt-2 block text-sm text-slate-300 font-semibold">Click to upload an image</span>
+                        </label>
+                        <input id="image-upload" type="file" @change="handleFileUpload" accept="image/*" class="file-input h-full w-full">
+                    </div>
+                    <template x-if="file">
+                        <p class="mt-4 text-slate-400">Selected: <span class="font-semibold text-slate-200" x-text="file.name"></span></p>
+                    </template>
+                </div>
+
+                <template x-if="originalImageUrl">
+                    <div class="space-y-6">
+                        <div class="text-center">
+                             <button @click="upscaleImage" class="btn-primary rounded-lg px-8 py-3 text-base font-semibold shadow-lg" :disabled="isProcessing">
+                                <span x-show="!isProcessing">Upscale Image</span>
+                                <span x-show="isProcessing">Upscaling...</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Previews -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div class="text-center">
+                                <h3 class="font-semibold text-slate-300 mb-2">Original</h3>
+                                <img :src="originalImageUrl" class="max-w-full mx-auto rounded-lg shadow-md border border-gray-700">
+                            </div>
+                            <div class="text-center">
+                                <h3 class="font-semibold text-slate-300 mb-2">Upscaled Result</h3>
+                                <div class="aspect-square bg-[#111827] rounded-lg flex items-center justify-center border border-gray-700">
+                                    <div x-show="isProcessing" class="flex flex-col items-center space-y-4">
+                                        <div class="loader"></div>
+                                        <p class="text-slate-400 font-semibold capitalize">Upscaling your image...</p>
+                                    </div>
+                                    <template x-if="upscaledImageUrl">
+                                        <img :src="upscaledImageUrl" class="max-w-full mx-auto rounded-lg">
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Download Button -->
+                         <div x-show="upscaledImageUrl" class="text-center">
+                            <a :href="upscaledImageUrl" :download="downloadFilename" class="w-full sm:w-auto inline-block bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-semibold text-lg shadow-lg">
+                                Download Upscaled Image
+                            </a>
+                        </div>
+                    </div>
+                </template>
+                
+                 <!-- Error Message -->
+                <div x-show="errorMessage" class="bg-red-900/50 border border-red-500 text-red-300 p-4 rounded-md" x-text="errorMessage"></div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
