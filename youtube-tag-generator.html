@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Free YouTube Tag Generator - Boost Your Video SEO | Bharat Bhushan</title>
+    <meta name="description" content="Generate dozens of relevant, high-traffic tags for your YouTube videos instantly. Enter your topic and get the best keywords to improve discoverability and rank higher.">
+    <meta name="keywords" content="youtube tag generator, youtube keyword tool, video seo, youtube tags, generate youtube tags, bharat bhushan tools">
+    <link rel="canonical" href="https://www.yourwebsite.com/youtube-tag-generator.html"> <!-- Replace with your actual domain -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Stylesheets and Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #EF4444; color: white; transition: background-color 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #DC2626; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .input-with-icon { position: relative; }
+        .input-with-icon .icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; }
+        .input-with-icon input { padding-left: 3rem; }
+    </style>
+    
+    <script>
+        function youtubeTagGenerator() {
+            return {
+                keyword: '',
+                isLoading: false,
+                generatedTags: [],
+                errorMessage: '',
+                
+                showNotification(message, type = 'success') {
+                    const notificationContainer = document.getElementById('notification-container');
+                    const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+                    const iconSvg = type === 'success' ? 
+                        '<svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' : 
+                        '<svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>';
+                    
+                    const notification = document.createElement('div');
+                    notification.className = `flex items-center text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ${bgColor}`;
+                    notification.innerHTML = `${iconSvg}<span>${message}</span>`;
+                    
+                    notificationContainer.appendChild(notification);
+                    setTimeout(() => notification.classList.remove('translate-x-full'), 10);
+                    setTimeout(() => {
+                        notification.classList.add('translate-x-full');
+                        notification.addEventListener('transitionend', () => notification.remove());
+                    }, 4000);
+                },
+
+                async generateTags() {
+                    if (!this.keyword.trim()) {
+                        this.showNotification('Please enter a topic or keyword.', 'error');
+                        return;
+                    }
+
+                    this.isLoading = true;
+                    this.generatedTags = [];
+                    this.errorMessage = '';
+
+                    const API_KEY = 'bc73a476e6msh10240cb95786540p14f225jsn6eef43bdb1d6';
+                    const API_HOST = 'youtube138.p.rapidapi.com';
+                    const API_URL = `https://youtube138.p.rapidapi.com/auto-complete/?q=${encodeURIComponent(this.keyword)}&hl=en&gl=US`;
+
+                    const options = {
+                        method: 'GET',
+                        headers: {
+                            'x-rapidapi-key': API_KEY,
+                            'x-rapidapi-host': API_HOST
+                        }
+                    };
+
+                    try {
+                        const response = await fetch(API_URL, options);
+                        const data = await response.json();
+                        
+                        if (!response.ok) {
+                            throw new Error(data.message || 'Could not fetch tag suggestions.');
+                        }
+
+                        if (data.results && data.results.length > 0) {
+                            this.generatedTags = data.results;
+                        } else {
+                            this.errorMessage = 'No tag suggestions found for this topic. Try a broader keyword.';
+                        }
+                    } catch (error) {
+                        console.error('API Error:', error);
+                        this.errorMessage = `Error: ${error.message}`;
+                    } finally {
+                        this.isLoading = false;
+                    }
+                },
+
+                copyTags() {
+                    if (this.generatedTags.length === 0) return;
+                    const tagsString = this.generatedTags.join(', ');
+                    navigator.clipboard.writeText(tagsString).then(() => {
+                        this.showNotification('All tags copied to clipboard!', 'success');
+                    }).catch(err => {
+                        console.error('Failed to copy tags: ', err);
+                        this.showNotification('Failed to copy tags.', 'error');
+                    });
+                }
+            };
+        }
+    </script>
+</head>
+<body class="text-slate-800" x-data="youtubeTagGenerator()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="youtube-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to YouTube Tools</a>
+        </div>
+    </header>
+
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-red-50 py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">YouTube Tag Generator</h1>
+                <p class="text-xl text-gray-600 mb-8">Enter a keyword for your video to generate dozens of relevant tags and improve your video's ranking.</p>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="mb-4">
+                        <div class="input-with-icon">
+                            <svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                            <input type="text" id="keyword-input" x-model="keyword" @keydown.enter="generateTags" class="w-full px-4 py-3 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Enter a video topic or keyword...">
+                        </div>
+                    </div>
+                    <button @click="generateTags" class="w-full btn-primary py-3 font-medium rounded-lg whitespace-nowrap" :disabled="isLoading">
+                        <span x-show="!isLoading">Generate Tags</span>
+                        <span x-show="isLoading">
+                            <svg class="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            Generating...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tags Display Section -->
+    <section id="tags-preview" class="py-12" x-show="generatedTags.length > 0 || errorMessage">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+                <div x-show="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-4" x-text="errorMessage"></div>
+                <div x-show="generatedTags.length > 0">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold text-gray-900">Generated Tags</h2>
+                        <button @click="copyTags" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg text-sm">Copy All</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2 p-4 bg-slate-50 rounded-lg border">
+                        <template x-for="tag in generatedTags" :key="tag">
+                            <span class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full" x-text="tag"></span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Popups -->
+    <div id="notification-container" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-800 text-slate-400">
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+            <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+            <div class="flex space-x-6 order-1 md:order-2">
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
