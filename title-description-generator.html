@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>AI YouTube Title & Description Generator | Bharat Bhushan</title>
+    <meta name="description" content="Generate a professional, SEO-friendly description and get alternative title ideas for your YouTube video. Enter your title and let our AI enhance your content.">
+    <meta name="keywords" content="youtube title generator, youtube description generator, youtube seo tool, video title ideas, ai content generator, bharat bhushan tools">
+    <link rel="canonical" href="https://www.yourwebsite.com/youtube-title-description-generator.html"> <!-- Replace with your actual domain -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Stylesheets and Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js Function Definition -->
+    <script>
+        function youtubeGenerator() {
+            return {
+                userInputTitle: '',
+                tone: 'Engaging',
+                isLoading: false,
+                generatedDescription: '',
+                generatedTitles: [],
+                errorMessage: '',
+
+                showNotification(message, type = 'success') {
+                    const container = document.getElementById('notification-container');
+                    const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+                    const notification = document.createElement('div');
+                    notification.className = `flex items-center text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ${bgColor}`;
+                    notification.innerHTML = `<span>${message}</span>`;
+                    container.appendChild(notification);
+                    setTimeout(() => notification.classList.remove('translate-x-full'), 10);
+                    setTimeout(() => {
+                        notification.classList.add('translate-x-full');
+                        notification.addEventListener('transitionend', () => notification.remove());
+                    }, 3000);
+                },
+
+                parseAIResponse(responseText) {
+                    this.generatedTitles = [];
+                    this.generatedDescription = '';
+
+                    const descriptionMatch = responseText.match(/Description:\s*```([\s\S]*?)```/);
+                    if (descriptionMatch && descriptionMatch[1]) {
+                        this.generatedDescription = descriptionMatch[1].trim();
+                    }
+
+                    const titlesSectionMatch = responseText.match(/Titles:([\s\S]*)/);
+                    if (titlesSectionMatch && titlesSectionMatch[1]) {
+                        const titlesSection = titlesSectionMatch[1];
+                        const titleRegex = /^\d+\.\s?"(.*?)"/gm;
+                        let match;
+                        while ((match = titleRegex.exec(titlesSection)) !== null) {
+                            this.generatedTitles.push(match[1]);
+                        }
+                    }
+                    
+                    if (!this.generatedDescription && this.generatedTitles.length === 0) {
+                       this.errorMessage = "Could not parse the AI response. The format was unexpected. Please try again.";
+                    }
+                },
+
+                async generateContent() {
+                    if (!this.userInputTitle.trim()) {
+                        this.showNotification('Please enter your video title.', 'error');
+                        return;
+                    }
+                    
+                    const apiKey = "AIzaSyAW_9aKAMj8gq2kvZ6VF6k0nYnZRD4ZKu8";
+                    
+                    this.isLoading = true;
+                    this.generatedTitles = [];
+                    this.generatedDescription = '';
+                    this.errorMessage = '';
+
+                    const prompt = `You are an expert YouTube content strategist and SEO copywriter. Your task is to generate one professional, engaging video description and 4 alternative, trending title ideas based on a user's video title.
+
+                    **User's Video Title:** "${this.userInputTitle}"
+                    **Desired Tone:** ${this.tone}
+
+                    **Instructions for Description:**
+                    - Write one well-structured description.
+                    - Start with a strong, engaging hook (the first 1-2 sentences) that grabs the viewer's attention.
+                    - Provide a concise summary of what a video with this title would be about.
+                    - Include a section with placeholder timestamps (e.g., "TIMESTAMPS: 00:00 - Intro").
+                    - Include a clear call-to-action (e.g., "If you found this helpful, please like and subscribe!").
+                    - End with a list of 5-7 relevant, SEO-friendly hashtags.
+
+                    **Instructions for Alternative Titles:**
+                    - Create 4 unique, trending, and viral-style alternative titles.
+                    - Use proven high-CTR (Click-Through Rate) formulas. Examples: "The Ultimate Guide to X", "You're Doing X Wrong - Here's Why", "5 Mistakes Everyone Makes With X", "I Tried X for 7 Days and This Happened".
+                    - Titles should be attention-grabbing and create intense curiosity.
+                    - Keep titles under 60 characters for best visibility.
+
+                    **Output Format (Strictly follow this format):**
+
+                    Description:
+                    \`\`\`
+                    [The full, single description text goes here]
+                    \`\`\`
+
+                    Titles:
+                    1. "Alternative Title One"
+                    2. "Alternative Title Two"
+                    3. "Alternative Title Three"
+                    4. "Alternative Title Four"`;
+
+                    const CORS_PROXY = "https://cors.bridged.cc/";
+                    const apiUrl = `${CORS_PROXY}https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ contents: [{ parts: [{ "text": prompt }] }] })
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.error.message || 'An unknown API error occurred.');
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.candidates && result.candidates[0].content.parts[0].text) {
+                            this.parseAIResponse(result.candidates[0].content.parts[0].text);
+                        } else {
+                            throw new Error('The AI did not return a valid response. It may have been blocked due to safety policies.');
+                        }
+
+                    } catch (error) {
+                        console.error('API Error:', error);
+                        this.errorMessage = `Error: ${error.message}`;
+                    } finally {
+                        this.isLoading = false;
+                    }
+                },
+
+                copyText(text) {
+                    if (!text) return;
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.showNotification('Copied to clipboard!', 'success');
+                    }).catch(err => {
+                        this.showNotification('Failed to copy.', 'error');
+                    });
+                },
+
+                copyAllTitles() {
+                    if (this.generatedTitles.length === 0) return;
+                    const titlesString = this.generatedTitles.join('\n');
+                    this.copyText(titlesString);
+                }
+            };
+        }
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
+        .btn-primary { background-color: #EF4444; color: white; transition: background-color 0.3s; }
+        .btn-primary:hover:not(:disabled) { background-color: #DC2626; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+    
+</head>
+<body class="text-slate-800" x-data="youtubeGenerator()">
+
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
+                </div>
+                <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
+            </a>
+            <a href="youtube-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to YouTube Tools</a>
+        </div>
+    </header>
+
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-red-50 py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">AI YouTube Title & Description Generator</h1>
+                <p class="text-xl text-gray-600 mb-8">Enter your video title to generate an engaging description and alternative title ideas.</p>
+                <div class="bg-white p-6 rounded-xl shadow-lg space-y-4">
+                    <div>
+                        <label for="keyword-input" class="block text-left text-sm font-semibold text-slate-700 mb-1">Your Video Title</label>
+                        <input type="text" id="keyword-input" x-model="userInputTitle" class="w-full px-4 py-3 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="e.g., How to Make the Perfect Omelette">
+                    </div>
+                    <div>
+                        <label for="tone-select" class="block text-left text-sm font-semibold text-slate-700 mb-1">Tone of Voice</label>
+                        <select id="tone-select" x-model="tone" class="w-full px-4 py-3 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                            <option>Engaging</option>
+                            <option>Professional</option>
+                            <option>Witty</option>
+                            <option>Casual</option>
+                            <option>Informative</option>
+                        </select>
+                    </div>
+                    <button @click="generateContent" class="w-full btn-primary py-3 font-medium rounded-lg whitespace-nowrap" :disabled="isLoading">
+                        <span x-show="!isLoading">Generate</span>
+                        <span x-show="isLoading">
+                            <svg class="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            Generating...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Display Section -->
+    <section id="results-preview" class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div x-show="isLoading" class="text-center">
+                     <svg class="animate-spin h-8 w-8 mx-auto text-red-500" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                     <p class="mt-2 text-slate-600">Generating content...</p>
+                </div>
+                <div x-show="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" x-text="errorMessage"></div>
+                
+                <div x-show="(generatedDescription || generatedTitles.length > 0) && !isLoading" class="space-y-8">
+                    <!-- Description Result -->
+                    <div x-show="generatedDescription">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-2xl font-bold text-gray-900">Generated Description</h2>
+                            <button @click="copyText(generatedDescription)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg text-sm">Copy Description</button>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border">
+                            <p class="text-slate-700 whitespace-pre-wrap" x-text="generatedDescription"></p>
+                        </div>
+                    </div>
+                    <!-- Title Results -->
+                    <div x-show="generatedTitles.length > 0">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-2xl font-bold text-gray-900">Alternative Titles</h2>
+                            <button @click="copyAllTitles()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg text-sm">Copy All Titles</button>
+                        </div>
+                        <div class="space-y-3">
+                            <template x-for="(title, index) in generatedTitles" :key="index">
+                                <div class="bg-white p-4 rounded-lg shadow-sm border flex justify-between items-center">
+                                    <p class="text-slate-800" x-text="title"></p>
+                                    <button @click="copyText(title)" class="text-slate-400 hover:text-red-500" title="Copy title">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.03 1.125 0 1.131.094 1.976 1.057 1.976 2.192V7.5m-9 7.5h9A2.25 2.25 0 0018 12.75V7.5M15 15h-3a3 3 0 00-3 3v3a3 3 0 003 3h3a3 3 0 003-3v-3a3 3 0 00-3-3z" /></svg>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Popups -->
+    <div id="notification-container" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-800 text-slate-400">
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+            <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
+            <div class="flex space-x-6 order-1 md:order-2">
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
