@@ -1,243 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
-    <!-- Standard favicon -->
-<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-
-<!-- Apple devices -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<!-- Android/Chrome -->
-<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
-
-<!-- Fallback .ico -->
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One PDF Tools - Bharat Bhushan</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Free PDF Tools - Merge, Split, Compress & Convert PDFs | Bharat Bhushan</title>
+    <meta name="description" content="Manage your PDF files with a complete suite of free online tools from Bharat Bhushan. Merge, split, compress, convert, and edit PDFs securely and easily.">
+    <meta name="keywords" content="pdf tools, free pdf editor, merge pdf, split pdf, compress pdf, pdf converter, Bharat Bhushan">
+    <link rel="canonical" href="https://www.bharatbhushan.com.np/pdf-tools.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (OG) Tags for Social Sharing -->
+    <meta property="og:title" content="Free PDF Tools - Merge, Split, Compress & Convert PDFs | Bharat Bhushan">
+    <meta property="og:description" content="The ultimate online toolkit for all your PDF needs. Convert, edit, and manage your documents for free.">
+    <meta property="og:image" content="https://i.imgur.com/d7uaSWD.png">
+    <meta property="og:url" content="https://www.bharatbhushan.com.np/pdf-tools.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Bharat Bhushan">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free PDF Tools - Merge, Split, Compress & Convert PDFs | Bharat Bhushan">
+    <meta name="twitter:description" content="The ultimate online toolkit for all your PDF needs. Convert, edit, and manage your documents for free.">
+    <meta name="twitter:image" content="https://i.imgur.com/d7uaSWD.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Stylesheets and Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC; /* slate-50 */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .footer-bg {
+            background-color: #0d1429;
         }
-        .hero-bg {
-            background-color: #F0FDF4; /* green-50 */
-            background-image: radial-gradient(circle at 50% 0, rgba(34, 197, 94, 0.08), transparent 50%);
-        }
-        .btn-primary {
-            background-color: #22C55E; /* green-500 */
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #16A34A; /* green-600 */
+        .subscribe-button {
+            background: linear-gradient(to right, #8B5CF6, #6366F1);
         }
         .tool-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #E5E7EB;
+            border-radius: 1.5rem;
+            padding: 2rem;
             background-color: white;
-            border: 1px solid #E2E8F0; /* slate-200 */
-            border-radius: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
-        }
-        .page-header {
-            background-color: #FFFFFF;
-            border-bottom: 1px solid #E2E8F0; /* slate-200 */
-        }
-        .category-title {
-            border-bottom: 2px solid #22C55E; /* green-500 */
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
-            display: inline-block;
-        }
-        .faq-item {
-            border-bottom: 1px solid #E2E8F0;
-        }
-        .faq-item summary::-webkit-details-marker {
-            display: none;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: #22C55E; /* Green accent for this category */
         }
     </style>
+
 </head>
-<body class="text-slate-800" x-data="{ mobileMenuOpen: false }">
+<body class="text-slate-800">
 
     <!-- Header -->
-    <header class="page-header sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center space-x-3">
-                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
-                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
-                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" />
-                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" />
-                    </svg>
-                </div>
+    <header class="bg-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <a href="index.html" class="flex items-center justify-center space-x-3">
+                <img src="https://i.imgur.com/d7uaSWD.png" alt="Bharat Bhushan Logo" class="h-10 w-auto">
                 <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
             </a>
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-2">
-                 <a href="index.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Home</a>
-                 <a href="contact.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Contact</a>
+            <nav class="mt-4 flex items-center justify-center space-x-8">
+                <a href="index.html#all-categories" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    Tools
+                </a>
+                <a href="about.html" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                    About
+                </a>
+                <a href="contact.html" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 2.006l7.997 3.878A2 2 0 0119 7.616V16a2 2 0 01-2 2H3a2 2 0 01-2-2V7.616a2 2 0 011.003-1.732zM10 13a3 3 0 100-6 3 3 0 000 6z" /></svg>
+                    Contact
+                </a>
             </nav>
-             <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-900 p-2 rounded-md hover:bg-slate-100">
-                    <span class="sr-only">Open menu</span>
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenuOpen" x-transition class="md:hidden" @click.away="mobileMenuOpen = false">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Home</a>
-                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
-            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero-bg">
-            <div class="container mx-auto px-6 py-20 sm:py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-                    The Ultimate PDF Toolkit
-                </h1>
-                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-700">
-                    Convert, merge, split, compress, and edit your PDF files with our complete suite of free and secure online tools. No installation required.
+        <!-- PDF Tools Hero -->
+        <section class="bg-white py-16 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <div class="flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-2xl bg-emerald-100">
+                        <i class="fas fa-file-pdf fa-2x text-emerald-600"></i>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+                        PDF Tools
+                    </h1>
+                </div>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                    Convert, merge, split, compress, and edit your PDF files with our complete suite of free and secure online tools.
                 </p>
-                <div class="mt-10">
-                    <a href="#tools" class="rounded-full btn-primary px-8 py-4 text-base font-semibold shadow-lg hover:shadow-xl transition">
-                        View All PDF Tools
-                    </a>
-                </div>
             </div>
         </section>
 
-        <!-- Tools Section -->
-        <section id="tools" class="py-20 sm:py-24 bg-white">
+        <!-- Tools Grid -->
+        <section class="py-16 sm:py-24 bg-slate-50">
             <div class="container mx-auto px-6">
-                
-                <!-- PDF Conversion Tools -->
-                <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">📄 PDF Conversion Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF to Word</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert PDFs to editable DOCX files.</p><a href="pdf-to-word.html" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF to Excel</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Extract data tables into XLSX spreadsheets.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF to PowerPoint</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Turn your PDF pages into PPTX slides.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF to Image</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert each PDF page into a JPG or PNG image.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Image to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Combine JPG, PNG, and other images into a single PDF.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Word to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert DOCX files to professional PDFs.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Excel to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert XLSX spreadsheets to PDF documents.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PowerPoint to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert PPTX presentations to shareable PDFs.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">HTML to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert any webpage to a PDF document.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Text to PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Convert plain text files into a simple PDF.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                    </div>
-                </div>
-
-                <!-- PDF Editing & Management Tools -->
-                <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">✂️ PDF Editing & Management Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Merge PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Combine multiple PDFs into one unified document.</p><a href="pdf-merger.html" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Split PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Extract a range of pages or every page into separate PDFs.</p><a href="pdf-splitter.html" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Compress PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Reduce the file size of your PDF while optimizing for quality.</p><a href="pdf-compressor.html" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Rotate PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Rotate specific pages or all pages in your PDF document.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Delete Pages</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Remove one or more pages from a PDF file.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Extract Pages</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create a new PDF from a selection of pages from your file.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Rearrange Pages</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Sort, reorder, or move pages within your PDF document.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Edit PDF Text</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Make basic text edits directly in your PDF file.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Add Watermark</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Stamp an image or text over your PDF pages.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Add Page Numbers</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Easily insert page numbers into your PDF document.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                    </div>
-                </div>
-
-                <!-- PDF Security Tools -->
-                <div class="mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🔐 PDF Security Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Unlock PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Remove a password from your PDF if you have the rights.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Protect PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Add a password and set permissions to protect your PDF.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Sign PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Create your signature and sign your PDF files online.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Redact PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Permanently remove sensitive information from your PDF.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                    </div>
-                </div>
-                
-                <!-- Advanced PDF Tools -->
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 category-title">🛠️ Advanced PDF Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">OCR PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Extract text from scanned PDFs to make them searchable.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Metadata Editor</h3><p class="text-sm text-slate-600 mt-2 flex-grow">View and edit PDF metadata like author, title, and keywords.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF Repair Tool</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Attempt to recover data from a corrupted or damaged PDF.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">PDF Translator</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Translate the text within your PDF to another language.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                        <div class="tool-card p-6 flex flex-col"><h3 class="font-semibold text-slate-900">Flatten PDF</h3><p class="text-sm text-slate-600 mt-2 flex-grow">Make form fields and annotations non-editable.</p><a href="#" class="text-sm font-semibold text-green-600 hover:text-green-500 mt-4 self-start">Use Tool &rarr;</a></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Why Choose Us Section -->
-        <section class="py-20 sm:py-24 bg-slate-50">
-            <div class="container mx-auto px-6">
-                 <div class="text-center max-w-2xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Secure, Fast, and Simple</h2>
-                    <p class="mt-4 text-lg text-slate-600">
-                        We built our PDF tools with your privacy and productivity in mind.
-                    </p>
-                </div>
-                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
-                    <div class="p-8">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.017h-.008v-.017z" /></svg>
-                        </div>
-                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Total File Security</h3>
-                        <p class="mt-2 text-base text-slate-600">Your files are uploaded via a secure connection and automatically deleted from our servers within a few hours.</p>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                        </div>
-                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Fast Cloud Processing</h3>
-                        <p class="mt-2 text-base text-slate-600">All processing is done on our powerful cloud servers, so you don't need to use any of your computer's resources.</p>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
-                        </div>
-                        <h3 class="mt-6 text-lg font-semibold text-slate-900">Works Everywhere</h3>
-                        <p class="mt-2 text-base text-slate-600">Our tools are web-based, meaning you can access them on any device with a modern browser, including mobile.</p>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    
+                    <a href="pdf-to-word.html" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-blue-100 shrink-0"><i class="fas fa-file-word text-blue-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF to Word</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert PDFs to editable DOCX files.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-green-100 shrink-0"><i class="fas fa-file-excel text-green-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF to Excel</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Extract data tables into XLSX spreadsheets.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-orange-100 shrink-0"><i class="fas fa-file-powerpoint text-orange-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF to PowerPoint</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Turn your PDF pages into PPTX slides.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-sky-100 shrink-0"><i class="fas fa-file-image text-sky-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF to Image</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert each PDF page into a JPG or PNG image.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-sky-100 shrink-0"><i class="fas fa-image text-sky-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Image to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Combine JPG, PNG, and other images into a single PDF.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-blue-100 shrink-0"><i class="fas fa-file-word text-blue-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Word to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert DOCX files to professional PDFs.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-green-100 shrink-0"><i class="fas fa-file-excel text-green-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Excel to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert XLSX spreadsheets to PDF documents.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-orange-100 shrink-0"><i class="fas fa-file-powerpoint text-orange-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PowerPoint to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert PPTX presentations to shareable PDFs.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 shrink-0"><i class="fab fa-html5 text-red-600"></i></div><h3 class="text-lg font-semibold text-slate-900">HTML to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert any webpage to a PDF document.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-slate-100 shrink-0"><i class="fas fa-file-alt text-slate-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Text to PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Convert plain text files into a simple PDF.</p></a>
+                    <a href="pdf-merger.html" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-compress-arrows-alt text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Merge PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Combine multiple PDFs into one unified document.</p></a>
+                    <a href="pdf-splitter.html" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-cut text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Split PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Extract a range of pages or every page into separate PDFs.</p></a>
+                    <a href="pdf-compressor.html" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-file-archive text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Compress PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Reduce the file size of your PDF while optimizing for quality.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-sync-alt text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Rotate PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Rotate specific pages or all pages in your PDF document.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-trash-alt text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Delete Pages</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Remove one or more pages from a PDF file.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-file-export text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Extract Pages</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Create a new PDF from a selection of pages from your file.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-sort text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Rearrange Pages</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Sort, reorder, or move pages within your PDF document.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-pen text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Edit PDF Text</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Make basic text edits directly in your PDF file.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-tint text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Add Watermark</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Stamp an image or text over your PDF pages.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-indigo-100 shrink-0"><i class="fas fa-list-ol text-indigo-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Add Page Numbers</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Easily insert page numbers into your PDF document.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 shrink-0"><i class="fas fa-unlock-alt text-red-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Unlock PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Remove a password from your PDF if you have the rights.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 shrink-0"><i class="fas fa-lock text-red-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Protect PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Add a password and set permissions to protect your PDF.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 shrink-0"><i class="fas fa-signature text-red-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Sign PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Create your signature and sign your PDF files online.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 shrink-0"><i class="fas fa-user-secret text-red-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Redact PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Permanently remove sensitive information from your PDF.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-purple-100 shrink-0"><i class="fas fa-search text-purple-600"></i></div><h3 class="text-lg font-semibold text-slate-900">OCR PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Extract text from scanned PDFs to make them searchable.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-purple-100 shrink-0"><i class="fas fa-info-circle text-purple-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Metadata Editor</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">View and edit PDF metadata like author, title, and keywords.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-purple-100 shrink-0"><i class="fas fa-tools text-purple-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF Repair Tool</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Attempt to recover data from a corrupted or damaged PDF.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-purple-100 shrink-0"><i class="fas fa-language text-purple-600"></i></div><h3 class="text-lg font-semibold text-slate-900">PDF Translator</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Translate the text within your PDF to another language.</p></a>
+                    <a href="#" target="_blank" class="tool-card"><div class="flex items-center gap-4"><div class="flex items-center justify-center h-12 w-12 rounded-xl bg-purple-100 shrink-0"><i class="fas fa-layer-group text-purple-600"></i></div><h3 class="text-lg font-semibold text-slate-900">Flatten PDF</h3></div><p class="mt-4 text-sm text-slate-600 flex-grow">Make form fields and annotations non-editable.</p></a>
                 </div>
             </div>
         </section>
+        
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 text-slate-400">
-        <div class="container mx-auto px-6 py-12">
-            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
-                <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
-                <div class="flex space-x-6 order-1 md:order-2">
-                    <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
-                    <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+    <footer class="footer-bg text-slate-400">
+        <div class="container mx-auto px-6 pt-16 pb-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Left Side -->
+                <div class="md:col-span-6 lg:col-span-6 space-y-8">
+                    <div>
+                        <a href="index.html" class="flex items-center space-x-3">
+                            <img src="https://i.imgur.com/d7uaSWD.png" alt="Bharat Bhushan Logo" class="h-10 w-auto">
+                            <span class="text-xl font-bold text-white">Bharat Bhushan</span>
+                        </a>
+                        <p class="mt-4 text-sm text-slate-400 max-w-xs">
+                            Your one-stop destination for free online tools to boost productivity.
+                        </p>
+                        <div class="mt-6 flex space-x-4">
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-white tracking-wider">Company</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li><a href="about.html" class="text-sm hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="contact.html" class="text-sm hover:text-white transition-colors">Contact</a></li>
+                            <li><a href="blog.html" class="text-sm hover:text-white transition-colors">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Side -->
+                <div class="md:col-span-6 lg:col-span-6 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-sm font-semibold text-white tracking-wider">Tools</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li><a href="ai-tools.html" class="text-sm hover:text-white transition-colors">AI Tools</a></li>
+                            <li><a href="image-tools.html" class="text-sm hover:text-white transition-colors">Image Tools</a></li>
+                            <li><a href="pdf-tools.html" class="text-sm hover:text-white transition-colors">PDF Tools</a></li>
+                            <li><a href="youtube-tools.html" class="text-sm hover:text-white transition-colors">YouTube Tools</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-white tracking-wider">Legal</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li><a href="privacy.html" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
+                            <li><a href="terms.html" class="text-sm hover:text-white transition-colors">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter and Copyright Section -->
+            <div class="mt-12 pt-8 border-t border-slate-800">
+                <div class="text-center">
+                     <h3 class="text-sm font-semibold text-white">Stay Updated</h3>
+                     <p class="mt-2 text-sm">Get the latest tools and updates delivered to your inbox.</p>
+                     <form class="mt-4 max-w-md mx-auto" onsubmit="handleSubscription(event)">
+                         <div class="flex flex-col sm:flex-row gap-2">
+                            <input id="email-input" type="email" placeholder="Enter your email" required class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-md text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
+                            <button type="submit" class="subscribe-button text-white text-sm font-semibold px-5 py-2 rounded-md hover:opacity-90 transition-opacity shrink-0">Subscribe</button>
+                         </div>
+                     </form>
+                </div>
+                <div class="mt-8 pt-8 border-t border-slate-800 text-center">
+                    <p class="text-sm text-slate-500">&copy; 2025 Bharat Bhushan. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Simple script to handle newsletter subscription and provide feedback
+        function handleSubscription(event) {
+            event.preventDefault(); // Prevents the form from actually submitting
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value;
+            
+            if (email) {
+                console.log(`Subscribed with email: ${email}`);
+                // You can add an alert or a message to the user here
+                alert(`Thank you for subscribing with ${email}!`);
+                emailInput.value = ''; // Clear the input field
+            }
+        }
+    </script>
 
 </body>
 </html>
