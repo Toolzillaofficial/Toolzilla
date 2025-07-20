@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="scroll-behavior: smooth;">
 <head>
-    <!-- Standard favicon -->
-<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-
-<!-- Apple devices -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<!-- Android/Chrome -->
-<link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
-
-<!-- Fallback .ico -->
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,40 +8,54 @@
     <title>Free Facebook Video Downloader - Download FB Videos | Bharat Bhushan</title>
     <meta name="description" content="Download Facebook videos in HD quality for free with Bharat Bhushan Tools. Our easy-to-use tool lets you save any public Facebook video directly to your device. No software needed.">
     <meta name="keywords" content="facebook video downloader, download facebook videos, fb downloader, save facebook video, facebook to mp4, bharat bhushan tools">
-    <link rel="canonical" href="https://www.yourwebsite.com/facebook-downloader.html"> <!-- Replace with your actual domain -->
+    <link rel="canonical" href="https://www.bharatbhushan.com.np/facebook-video-downloader.html">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph (OG) Tags for Social Sharing -->
     <meta property="og:title" content="Free Facebook Video Downloader by Bharat Bhushan">
     <meta property="og:description" content="The easiest way to download and save public videos from Facebook in high quality. Fast, free, and works on any device.">
-    <meta property="og:image" content="https://www.yourwebsite.com/og-image-facebook.jpg"> <!-- Replace with a link to a preview image -->
-    <meta property="og:url" content="https://www.yourwebsite.com/facebook-downloader.html">
+    <meta property="og:image" content="https://i.imgur.com/d7uaSWD.png">
+    <meta property="og:url" content="https://www.bharatbhushan.com.np/facebook-video-downloader.html">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Bharat Bhushan">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free Facebook Video Downloader by Bharat Bhushan">
     <meta name="twitter:description" content="The best online tool to download Facebook videos quickly and for free. Supports HD and SD quality downloads.">
-    <meta name="twitter:image" content="https://www.yourwebsite.com/twitter-image-facebook.jpg"> <!-- Replace with a link to a preview image -->
+    <meta name="twitter:image" content="https://i.imgur.com/d7uaSWD.png">
 
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    
     <!-- Stylesheets and Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Alpine.js -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
-        .page-header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; }
         .btn-primary { background-color: #1D4ED8; color: white; transition: background-color 0.3s; } /* Blue-700 */
         .btn-primary:hover:not(:disabled) { background-color: #1E40AF; } /* Blue-800 */
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
         .input-with-icon { position: relative; }
         .input-with-icon .icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; }
         .input-with-icon input { padding-left: 3rem; }
-        .faq-toggle i { transition: transform 0.3s; }
-        .faq-toggle[aria-expanded="true"] i { transform: rotate(180deg); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .footer-bg { background-color: #0d1429; }
+        .subscribe-button { background: linear-gradient(to right, #8B5CF6, #6366F1); }
     </style>
     
     <!-- JSON-LD Structured Data for FAQ -->
@@ -81,15 +82,26 @@
 <body class="text-slate-800">
 
     <!-- Header -->
-    <header class="page-header sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-             <a href="index.html" class="flex items-center space-x-3">
-                <div class="bg-indigo-600 rounded-lg p-2 flex items-center justify-center shadow-sm">
-                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 17.25L17.25 6.75" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75L17.25 17.25" /></svg>
-                </div>
+    <header class="bg-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <a href="index.html" class="flex items-center justify-center space-x-3">
+                <img src="https://i.imgur.com/d7uaSWD.png" alt="Bharat Bhushan Logo" class="h-10 w-auto">
                 <span class="text-2xl font-bold text-slate-900">Bharat Bhushan</span>
             </a>
-            <a href="video-tools.html" class="rounded-lg px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">Back to Video Tools</a>
+            <nav class="mt-4 flex items-center justify-center space-x-8">
+                <a href="index.html#all-categories" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    Tools
+                </a>
+                <a href="about.html" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                    About
+                </a>
+                <a href="contact.html" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 2.006l7.997 3.878A2 2 0 0119 7.616V16a2 2 0 01-2 2H3a2 2 0 01-2-2V7.616a2 2 0 011.003-1.732zM10 13a3 3 0 100-6 3 3 0 000 6z" /></svg>
+                    Contact
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -103,11 +115,13 @@
                 <div class="bg-white p-6 rounded-xl shadow-lg">
                     <div class="mb-4">
                         <div class="input-with-icon">
-                            <svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                            <i class="icon fab fa-facebook text-blue-500"></i>
                             <input type="text" id="video-url" class="w-full px-4 py-3 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Paste Facebook video link here">
                         </div>
                     </div>
-                    <button id="download-btn" class="w-full btn-primary py-3 font-medium rounded-lg whitespace-nowrap">Download Video</button>
+                    <button id="download-btn" class="w-full btn-primary py-3 font-semibold rounded-lg text-lg flex items-center justify-center">
+                        Download
+                    </button>
                 </div>
             </div>
         </div>
@@ -119,10 +133,10 @@
             <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg">
                 <div class="flex flex-col md:flex-row gap-6">
                     <div class="w-full md:w-2/5">
-                        <img id="video-thumbnail" src="" alt="Video Thumbnail Preview" class="w-full h-auto rounded-lg object-cover object-top">
+                        <img id="video-thumbnail" src="https://placehold.co/400x225/1D4ED8/FFFFFF?text=Facebook+Video" alt="Video Thumbnail Preview" class="w-full h-auto rounded-lg object-cover object-top">
                     </div>
                     <div class="w-full md:w-3/5">
-                        <h2 id="video-title" class="text-xl font-semibold text-gray-900 mb-4">Video Title</h2>
+                        <h2 id="video-title" class="text-xl font-semibold text-gray-900 mb-4">Video Title Will Appear Here</h2>
                         <div id="download-buttons-container" class="flex flex-wrap gap-2">
                             <!-- Download buttons will be dynamically inserted here -->
                         </div>
@@ -143,43 +157,108 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Save any public Facebook video in three simple steps.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl font-bold">1</div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Copy Video Link</h3>
-                    <p class="text-gray-600">Find the video on Facebook, click the 'Share' button, and then 'Copy link'.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl font-bold">2</div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Paste the Link</h3>
-                    <p class="text-gray-600">Paste the copied URL into the input field on our Facebook downloader.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl font-bold">3</div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Download</h3>
-                    <p class="text-gray-600">Click the download button for your preferred quality (HD or SD) to save the video.</p>
-                </div>
+                <div class="text-center p-6"><div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto text-2xl font-bold">1</div><h3 class="mt-6 text-xl font-semibold text-gray-900 mb-2">Copy Video Link</h3><p class="text-gray-600">Find the video on Facebook, click the 'Share' button, and then 'Copy link'.</p></div>
+                <div class="text-center p-6"><div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto text-2xl font-bold">2</div><h3 class="mt-6 text-xl font-semibold text-gray-900 mb-2">Paste the Link</h3><p class="text-gray-600">Paste the copied URL into the input field on our Facebook downloader.</p></div>
+                <div class="text-center p-6"><div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto text-2xl font-bold">3</div><h3 class="mt-6 text-xl font-semibold text-gray-900 mb-2">Download</h3><p class="text-gray-600">Click the download button for your preferred quality (HD or SD) to save the video.</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-2" x-data="{ open: 1 }">
+                <details class="p-4 rounded-lg border bg-white" :open="open === 1" @click.prevent="open = (open === 1 ? null : 1)">
+                    <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">Is this Facebook video downloader free?<i class="fas fa-chevron-down transition-transform" :class="{'rotate-180': open === 1}"></i></summary>
+                    <p class="mt-4 text-slate-600">Yes, our Facebook video downloader is 100% free to use with no limits on the number of downloads.</p>
+                </details>
+                <details class="p-4 rounded-lg border bg-white" :open="open === 2" @click.prevent="open = (open === 2 ? null : 2)">
+                    <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">Can I download private Facebook videos?<i class="fas fa-chevron-down transition-transform" :class="{'rotate-180': open === 2}"></i></summary>
+                    <p class="mt-4 text-slate-600">No, this tool only supports downloading videos from public Facebook posts. You cannot download videos from private accounts or groups.</p>
+                </details>
+                <details class="p-4 rounded-lg border bg-white" :open="open === 3" @click.prevent="open = (open === 3 ? null : 3)">
+                    <summary class="flex justify-between items-center font-semibold text-slate-900 cursor-pointer">What quality can I download the videos in?<i class="fas fa-chevron-down transition-transform" :class="{'rotate-180': open === 3}"></i></summary>
+                    <p class="mt-4 text-slate-600">You can download videos in both Standard Definition (SD) and High Definition (HD), depending on the quality of the original uploaded video.</p>
+                </details>
             </div>
         </div>
     </section>
 </main>
 
 <!-- Footer -->
-<footer class="bg-slate-800 text-slate-400">
-    <div class="container mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row justify-between items-center text-sm">
-            <p class="text-slate-500 order-2 md:order-1 mt-4 md:mt-0">&copy; 2025 Bharat Bhushan. All Rights Reserved.</p>
-            <div class="flex space-x-6 order-1 md:order-2">
-                <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
-                <a href="contact.html" class="hover:text-white transition-colors">Contact Us</a>
+<footer class="footer-bg text-slate-400">
+    <div class="container mx-auto px-6 pt-16 pb-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Left Side -->
+            <div class="md:col-span-6 lg:col-span-6 space-y-8">
+                <div>
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <img src="https://i.imgur.com/d7uaSWD.png" alt="Bharat Bhushan Logo" class="h-10 w-auto">
+                        <span class="text-xl font-bold text-white">Bharat Bhushan</span>
+                    </a>
+                    <p class="mt-4 text-sm text-slate-400 max-w-xs">
+                        Your one-stop destination for free online tools to boost productivity.
+                    </p>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider">Company</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="about.html" class="text-sm hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-sm hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="blog.html" class="text-sm hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div class="md:col-span-6 lg:col-span-6 grid grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider">Tools</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="ai-tools.html" class="text-sm hover:text-white transition-colors">AI Tools</a></li>
+                        <li><a href="image-tools.html" class="text-sm hover:text-white transition-colors">Image Tools</a></li>
+                        <li><a href="pdf-tools.html" class="text-sm hover:text-white transition-colors">PDF Tools</a></li>
+                        <li><a href="youtube-tools.html" class="text-sm hover:text-white transition-colors">YouTube Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider">Legal</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="privacy.html" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-sm hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+
+        <!-- Newsletter and Copyright Section -->
+        <div class="mt-12 pt-8 border-t border-slate-800">
+            <div class="text-center">
+                 <h3 class="text-sm font-semibold text-white">Stay Updated</h3>
+                 <p class="mt-2 text-sm">Get the latest tools and updates delivered to your inbox.</p>
+                 <form class="mt-4 max-w-md mx-auto" onsubmit="handleSubscription(event)">
+                     <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="email-input" type="email" placeholder="Enter your email" required class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-md text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
+                        <button type="submit" class="subscribe-button text-white text-sm font-semibold px-5 py-2 rounded-md hover:opacity-90 transition-opacity shrink-0">Subscribe</button>
+                     </div>
+                 </form>
+            </div>
+            <div class="mt-8 pt-8 border-t border-slate-800 text-center">
+                <p class="text-sm text-slate-500">&copy; 2025 Bharat Bhushan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
 <script id="api-script">
 document.addEventListener('DOMContentLoaded', function() {
-    // API Configuration updated to the new endpoint
     const RAPIDAPI_KEY = 'bc73a476e6msh10240cb95786540p14f225jsn6eef43bdb1d6';
     const RAPIDAPI_HOST = 'facebook-media-downloader1.p.rapidapi.com';
     const API_URL = 'https://facebook-media-downloader1.p.rapidapi.com/get_media';
@@ -216,15 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function populatePreview(data) {
-        // This API provides a thumbnail and title directly in the main object
         videoThumbnail.src = data.thumbnail || "https://placehold.co/600x400/1D4ED8/FFFFFF?text=Facebook+Video";
         videoTitle.textContent = data.title || 'Facebook Video';
         buttonsContainer.innerHTML = '';
         
-        // The new API provides links as an object, not an array
         if (data.links) {
             for (const [quality, link] of Object.entries(data.links)) {
-                if (link) { // Ensure the link exists
+                if (link) { 
                     const btn = document.createElement('a');
                     btn.href = link;
                     btn.target = "_blank";
@@ -250,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        downloadBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...';
+        downloadBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
         downloadBtn.disabled = true;
 
         const options = {
@@ -276,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showNotification(error.message, 'error');
             videoPreview.classList.add('hidden');
         } finally {
-            downloadBtn.innerHTML = 'Download Video';
+            downloadBtn.innerHTML = 'Download';
             downloadBtn.disabled = false;
         }
     });
